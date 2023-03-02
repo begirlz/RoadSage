@@ -1,13 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 // import Apollo
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context'
 
-//import logo from './logo.svg';
 import './App.css';
 
-import Navbar from './components/Nav';
+import Navbar from './components/Navbar';
 
 // GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -45,10 +44,11 @@ function App() {
               exact path='/saved'
               element={<SavedBooks />}
             /> */}
-            <Route
+            {/* <Route
               path='*'
               element={<h1 className='display-2'>Wrong page!</h1>}
-            />
+            /> */}
+            <Route exact path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </>
       </Router>
