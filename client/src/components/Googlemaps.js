@@ -1,0 +1,3 @@
+// TODO all the logic of the google maps component
+// steps: create an API key from google maps 2.) install package,
+//  3.) get it to work simple mode to a specific location-- 1... once i have the address of the location.. then I need the lattitude and longitude of that specific address. get that from teh google maps API geocode - once get the latitude and longitude - insert that in the google maps package and make it render. 
