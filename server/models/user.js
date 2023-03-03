@@ -21,7 +21,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    // set savedBooks to be an array of data that adheres to the bookSchema
+    // set savedlist to be an array of data that adheres to the bookSchema
     savedlist: [tripsSchema],
   },
   // set this to use virtual below
