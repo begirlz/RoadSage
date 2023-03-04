@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";// no reloading page
 import '../css/bootstrap.css';
 import '../App.css';
-import banner from '../img/banner.jpg'
+import banner from '../img/road.gif'
 
 function Header() {
 
@@ -14,9 +14,9 @@ function Header() {
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
-        width: '100%', height: '500px'
-        // width: '100vw',
-        // height: '100vh'
+        //width: '100%', height: '500px'
+        width: '100vw',
+        height: '100vh'
         }}>
             <header >
             <nav className="navbar navbar-expand-lg navbar-dark mb-2" >
