@@ -12,6 +12,9 @@ node_modules
 # production
 /build
 
+#package
+package-lock.json
+
 # misc
 .env
 .DS_Store
