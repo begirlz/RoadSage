@@ -2,21 +2,22 @@ import React, { useCallback, useRef, useState } from 'react'
 import { GoogleMap, LoadScript, DirectionsRenderer, DirectionsService } from '@react-google-maps/api';
 
 // state means all the information of the variable of the component, setState means to change those values - then to = useState is the function from react letting them know this is a hook which purpose is to create reactive functions. 
+
 function MyComponent() {
-  const [state, setState]= useState ({
-    response: null,
-    travelMode: 'DRIVING',
-    origin: 'Las Vegas',
+const [state, setState]= useState ({
+response: null,
+travelMode: 'DRIVING',
+     origin: 'Las Vegas',
     destination: 'Arizona'
   });
 
-  const originInput = useRef("")
-  const destinationInput = useRef("")
+const originInput = useRef("")
+const destinationInput = useRef("")
 
-  // purpose of a useRef is to connect an input with a variable
+//   // purpose of a useRef is to connect an input with a variable
 
-  // directionsCallback is importing useCallback to receive the info and run the function
-  const directionsCallback= useCallback ((res)=>{
+//   // directionsCallback is importing useCallback to receive the info and run the function
+ const directionsCallback= useCallback ((res)=>{
     if ( res != null ) {
       setState({response:res,origin: '',
       destination: ''})
@@ -44,11 +45,7 @@ function searchRoute (){
 <button onClick={searchRoute}>Search </button>
 
 
-  
-
-    <LoadScript
-      googleMapsApiKey="AIzaSyDJTN7z4Lhp94m-FDRj1-PVaoq1OwvVfyw"
-    >
+   
       
       <GoogleMap
             // required
