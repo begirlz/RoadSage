@@ -3,12 +3,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import Apollo
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context'
-import Home from "./pages/Home";
+//css
 import './App.css';
-
+//components
+import Home from "./pages/Home";
 import Navbar from './components/Navbar';
 import Mytrips from './components/MyTrips';
 import Account from './components/Account';
+import Googlemaps from './components/Googlemaps';
 
 // GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -49,6 +51,10 @@ function App() {
             <Route
               exact path='/account'
               element={<Account />}
+            />
+            <Route
+              exact path='/SearchTrips'
+              element={<Googlemaps />}
             />
             {/* <Route
               path='*'
