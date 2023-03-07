@@ -39,6 +39,7 @@ function searchRoute (){
 }
   return (
     <div>
+         <LoadScript googleMapsApiKey={process.env.APIgooglemaps}>
 
 <input type = "text" placeholder='origin' ref={originInput}/> 
 <input type = "text" placeholder='destination' ref={destinationInput}/> 
