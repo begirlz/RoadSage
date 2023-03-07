@@ -1,24 +1,107 @@
-// TODO all the logic of the google maps component
-// steps: create an API key from google maps 2.) install package,
-//  3.) get it to work simple mode to a specific location-- 1... once i have the address of the location.. then I need the lattitude and longitude of that specific address. get that from teh google maps API geocode - once get the latitude and longitude - insert that in the google maps package and make it render. 
+import React, { useCallback, useRef, useState } from 'react'
+import { GoogleMap, LoadScript, DirectionsRenderer, DirectionsService } from '@react-google-maps/api';
 
-{/* <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script> */}
+// state means all the information of the variable of the component, setState means to change those values - then to = useState is the function from react letting them know this is a hook which purpose is to create reactive functions. 
+function MyComponent() {
+  const [state, setState]= useState ({
+    response: null,
+    travelMode: 'DRIVING',
+    origin: 'Las Vegas',
+    destination: 'Arizona'
+  });
 
-// import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+  const originInput = useRef("")
+  const destinationInput = useRef("")
 
-// const MyMapComponent = withScriptjs(withGoogleMap((props) =>
-//   <GoogleMap
-//     defaultZoom={8}
-//     defaultCenter={{ lat: -34.397, lng: 150.644 }}
-//   >
-//     {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} />}
-//   </GoogleMap>
-// ))
+  // purpose of a useRef is to connect an input with a variable
 
-// <MyMapComponent
-//   isMarkerShown
-//   googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-//   loadingElement={<div style={{ height: `100%` }} />}
-//   containerElement={<div style={{ height: `400px` }} />}
-//   mapElement={<div style={{ height: `100%` }} />}
-// />
+  // directionsCallback is importing useCallback to receive the info and run the function
+  const directionsCallback= useCallback ((res)=>{
+    if ( res != null ) {
+      setState({response:res,origin: '',
+      destination: ''})
+    }
+  })
+
+  // we are using different variables to do the search in google maps and to store the users input information. the reason is we want to wait for the user to finish typing in the values in the search bar.
+
+  // setState in the searchRoute is to change the values in the state for the user input
+function searchRoute (){
+  if (originInput.current.value!="" && destinationInput.current.value!="")
+  {
+    setState({
+      response:null,
+      origin: originInput.current.value,
+      destination: destinationInput.current.value
+    })
+  }
+}
+  return (
+    <div>
+
+<input type = "text" placeholder='origin' ref={originInput}/> 
+<input type = "text" placeholder='destination' ref={destinationInput}/> 
+<button onClick={searchRoute}>Search </button>
+
+
+  
+
+    <LoadScript
+      googleMapsApiKey="AIzaSyDJTN7z4Lhp94m-FDRj1-PVaoq1OwvVfyw"
+    >
+      
+      <GoogleMap
+            // required
+            id='direction-example'
+            // required
+            mapContainerStyle={{
+              height: '400px',
+              width: '100%'
+            }}
+            // required
+            zoom={2}
+            // required
+            center={{
+              lat: 0,
+              lng: -180
+            }}
+            
+          >  // DirectionsService means its just searching and getting the data for the directions.
+          //  once the information gets back to the server it will run the callback function.
+            /* the DirectionsService is like a fetch request in this instance of code. Once the directions have come back from the google maps, it will run. */
+            {
+              (
+                state.destination !== '' &&
+                state.origin !== ''
+              ) && (
+                <DirectionsService
+                  options={{
+                    destination: state.destination,
+                    origin: state.origin,
+                    travelMode: 'DRIVING'
+                  }}
+                  // required
+                  callback={directionsCallback}
+                  
+                />
+              )
+            }
+          {/* DirectionsRenderer will use the information from the DirectionsService to actually create/drawer the information in the map for the user. if the response is no longer equal to null then the directionRenderer will run and create a route.   */}
+            {
+              state.response !== null && (
+                <DirectionsRenderer
+                  // required
+                  options={{ 
+                    directions: state.response
+                  }}
+                 
+                />
+              )
+            }
+          </GoogleMap>
+    </LoadScript>
+    </div>
+  )
+}
+
+export default React.memo(MyComponent)
