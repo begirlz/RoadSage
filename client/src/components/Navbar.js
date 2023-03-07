@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";// no reloading page
 import '../css/bootstrap.css';
 import '../App.css';
 import banner from '../img/road.gif'
-import { Tooltip } from 'react-tooltip'
-import 'react-tooltip/dist/react-tooltip.css'
+// import { Tooltip } from 'react-tooltip'
+// import 'react-tooltip/dist/react-tooltip.css'
 
 function Header() {
 
@@ -23,7 +23,7 @@ function Header() {
             height: '100vh'
         }}>           
             <header >
-                <Tooltip anchorSelect=".menu-item" />
+                {/* <Tooltip anchorSelect=".menu-item" /> */}
                 <nav className="navbar navbar-expand-lg navbar-dark mb-2" >
 
                     <div className="navbar">
