@@ -39,6 +39,7 @@ function MyTrips() {
   }
 
   return (
+    <div classname = 'fixed-center'>
     <div class="d-flex flex-column mb-3">
       <div class="p-2 justify-content-center">
         <h2 class="text-center">My Trips</h2>
@@ -106,6 +107,7 @@ function MyTrips() {
 
         <button type="button" class="btn btn-light">Add Trip</button>
       </form>
+    </div>
     </div>
   );
 }

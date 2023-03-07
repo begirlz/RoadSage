@@ -10,9 +10,9 @@ function Header() {
 
 
     return (
-        <header >
+        <header>
             <Tooltip anchorSelect=".menu-item" />
-            <nav className="navbar navbar-expand-lg navbar-dark mb-2">
+            <nav className="navbar navbar-expand-lg navbar-dark mb-2 fixed-top">
 
                 <div className="navbar">
                     <div className="ms-3">
