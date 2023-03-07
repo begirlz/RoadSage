@@ -9,6 +9,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import Mytrips from './components/MyTrips';
 import Account from './components/Account';
+import MyComponent from './components/Googlemaps';
 
 // GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -49,6 +50,10 @@ function App() {
             <Route
               exact path='/account'
               element={<Account />}
+            />
+            <Route
+              exact path='/googlemaps'
+              element={<MyComponent />}
             />
             {/* <Route
               path='*'
