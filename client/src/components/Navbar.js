@@ -12,7 +12,7 @@ function Header() {
     return (
         <header >
             <Tooltip anchorSelect=".menu-item" />
-            <nav className="navbar navbar-expand-lg navbar-dark mb-2 fixed-top" >
+            <nav className="navbar navbar-expand-lg navbar-dark mb-2">
 
                 <div className="navbar">
                     <div className="ms-3">

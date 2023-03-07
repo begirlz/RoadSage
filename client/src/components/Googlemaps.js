@@ -40,10 +40,11 @@ function searchRoute (){
   return (
     <div>
          <LoadScript googleMapsApiKey={process.env.APIgooglemaps}>
-
-<input type = "text" placeholder='origin' ref={originInput}/> 
+<div class="d-flex flex-column mb-3 searchBtn" >
+  <input type = "text" placeholder='origin' ref={originInput}/> 
 <input type = "text" placeholder='destination' ref={destinationInput}/> 
-<button onClick={searchRoute}>Search </button>
+<button onClick={searchRoute} type="button" class="btn btn-light" >Search </button>
+</div>
 
 
    
