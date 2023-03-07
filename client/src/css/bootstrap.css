@@ -4007,7 +4007,7 @@ textarea.form-control-lg {
     justify-content: flex-start;
   }
   .navbar-expand-lg .navbar-nav {
-    flex-direction: row;
+    flex-direction: column;
   }
   .navbar-expand-lg .navbar-nav .dropdown-menu {
     position: absolute;
@@ -5534,6 +5534,14 @@ textarea.form-control-lg {
   }
   .modal-fullscreen-lg-down .modal-body {
     overflow-y: auto;
+  }
+  .navbar-expand-lg .navbar-collapse .buger-menu{
+    transform: scale(0.1);
+    height: 10px;
+    padding-bottom: 10%;
+  }
+  .h1-header {
+    font-size: 60px!important;
   }
 }
 @media (max-width: 1199.98px) {
