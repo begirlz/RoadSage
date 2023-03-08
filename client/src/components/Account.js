@@ -24,8 +24,7 @@ function Account() {
 
     return (
         <div id="big-box" className="main-container">
-            <div class="" id="small-box">
-                {/* <div className="account"> */}
+            <div className='inner-container text-light'>
                 <h1>My Account</h1>
                 <form onSubmit={handleSubmit}>
                     <label>
