@@ -1,9 +1,11 @@
 import React, { useCallback, useRef, useState } from 'react'
-import { GoogleMap, LoadScript, DirectionsRenderer, DirectionsService } from '@react-google-maps/api';
+import { GoogleMap, useLoadScript, DirectionsRenderer, DirectionsService } from '@react-google-maps/api';
 
 // state means all the information of the variable of the component, setState means to change those values - then to = useState is the function from react letting them know this is a hook which purpose is to create reactive functions. 
 
 function MyComponent() {
+  const APIKey = process.env.REACT_APP_API_KEY;
+
   const [state, setState] = useState({
     response: null,
     travelMode: 'DRIVING',
@@ -38,16 +40,22 @@ function MyComponent() {
       })
     }
   }
+
+const { isLoaded } = useLoadScript({
+  googleMapsApiKey: APIKey,
+})
+if(!isLoaded){
+  return <p>loading...</p>
+}
+
   return (
     <div id="big-box" className="main-container">
     <div class="" id="small-box">
       {/* <LoadScript googleMapsApiKey={process.env.APIgooglemaps}> */}
-      <LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}>
+      {/* <LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}> */}
         <input type="text" placeholder='origin' ref={originInput} />
         <input type="text" placeholder='destination' ref={destinationInput} />
         <button onClick={searchRoute}>Search </button>
-
-
 
         <GoogleMap
           // required
@@ -101,7 +109,7 @@ function MyComponent() {
             )
           }
         </GoogleMap>
-      </LoadScript>
+      {/* </LoadScript> */}
     </div>
     </div>
   )
