@@ -61,21 +61,21 @@ const resolvers = {
 
     //   return { token, user };
     // },
-    saveTrip: async (parent, { userId, book }, context) => {
-      const updatedUser = await User.findOneAndUpdate(
-        { _id: userId },
-        { $addToSet: { savedTrips: trip } },
-        { new: true, runValidators: true }
-      );
-    },
-    removeTrip: async (parent, { tripId }, context) => {
-      const updatedUser = await User.findOneAndUpdate(
-        { _id: user._id },
-        { $pull: { savedTrips: { tripId: tripId } } },
-        { new: true }
-      );
+    // saveTrip: async (parent, { userId, trip }, context) => {
+    //   const updatedUser = await User.findOneAndUpdate(
+    //     { _id: userId },
+    //     { $addToSet: { savedTrips: trip } },
+    //     { new: true, runValidators: true }
+    //   );
+    // },
+    // removeTrip: async (parent, { tripId }, context) => {
+    //   const updatedUser = await User.findOneAndUpdate(
+    //     { _id: user._id },
+    //     { $pull: { savedTrips: { tripId: tripId } } },
+    //     { new: true }
+    //   );
 
-    }
+    // }
   },
 };
 
