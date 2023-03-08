@@ -23,24 +23,27 @@ function Account() {
     }
 
     return (
-        <div className="account">
-            <h1>My Account</h1>
-        <form onSubmit={handleSubmit}>
-            <label>
-                Name:
-                <input type="text" value={name} onChange={handleNameChange} />
-            </label>
-            <label>
-                Email:
-                <input type="text" value={email} onChange={handleEmailChange} />
-            </label>
-            <label>
-                Password:
-                <input type="password" value={password} onChange={handlePasswordChange} />
-            </label>
-            <button>Submit</button>
-            </form>
+        <div id="big-box" className="main-container">
+            <div class="" id="small-box">
+                {/* <div className="account"> */}
+                <h1>My Account</h1>
+                <form onSubmit={handleSubmit}>
+                    <label>
+                        Name:
+                        <input type="text" value={name} onChange={handleNameChange} />
+                    </label>
+                    <label>
+                        Email:
+                        <input type="text" value={email} onChange={handleEmailChange} />
+                    </label>
+                    <label>
+                        Password:
+                        <input type="password" value={password} onChange={handlePasswordChange} />
+                    </label>
+                    <button>Submit</button>
+                </form>
             </div>
+        </div>
     );
 }
 
