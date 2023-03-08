@@ -23,10 +23,47 @@ function Account() {
     }
 
     return (
-        <div id="big-box" className="main-container">
-            <div className='inner-container text-light'>
+        <div id="big-box" className="main-container ">
+            <div className='inner-container text-light '>
                 <h1>My Account</h1>
-                <form onSubmit={handleSubmit}>
+                <form className="justify-content-center" id="frm_account" onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label for="txt_name">Name:</label>
+                        <input className="form-control" type="text" name="Name" defaultValue={name}
+                            value={name} onChange={handleNameChange}
+                        // onBlur={handleChange} 
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label for="txt_email">Email Address:</label>
+                        <input className="form-control" type="email" name="Email" defaultValue={email}
+                            value={email} onChange={handleEmailChange}
+                        // onBlur={handleChange} 
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label for="txt_password">Password:</label>
+                        <input className="form-control" type="password" name="Password" defaultValue={password}
+                            value={password} onChange={handlePasswordChange}
+                        // onBlur={handleChange} 
+                        />
+                    </div>
+                    {/* {errorMessage && (
+                    <div>
+                        <p className="error-text">{errorMessage}</p>
+                    </div>
+                )} */}
+
+                    <div className="form-group mt-3 float-end col-lg-3" >
+                        <button id="btn_submit" className="btn btn-light w-100" type="submit"
+                        //onSubmit={handleSubmit}
+                        >
+                            Submit
+                        </button>
+                    </div>
+                </form>
+
+                {/* <form onSubmit={handleSubmit}>
                     <label>
                         Name:
                         <input type="text" value={name} onChange={handleNameChange} />
@@ -40,7 +77,7 @@ function Account() {
                         <input type="password" value={password} onChange={handlePasswordChange} />
                     </label>
                     <button>Submit</button>
-                </form>
+                </form> */}
             </div>
         </div>
     );
