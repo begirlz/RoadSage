@@ -12,12 +12,12 @@ const resolvers = {
       }
       throw new AuthenticationError('Please log in');
     },
-    users: async () => {
-      return User.find()
-    },
-    user: async (parent, { username }) => {
-      return User.findOne({ username })
-    }
+    // users: async () => {
+    //   return User.find()
+    // },
+    // user: async (parent, { username }) => {
+    //   return User.findOne({ username })
+    // }
   },
 
   Mutation: {

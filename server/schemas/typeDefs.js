@@ -6,6 +6,8 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
+    savedlist: [Trip]
+    tripCount: Int
   }
 
   type Trip {

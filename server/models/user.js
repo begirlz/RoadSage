@@ -47,6 +47,10 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
+userSchema.virtual('tripCount').get(function () {
+  return this.savedlist.length;
+});
+
 const User = model('User', userSchema);
 
 module.exports = User;
