@@ -8,7 +8,6 @@ function Header() {
 
     const [isCollapse, setisCollapse] = React.useState(false)
 
-
     return (
         <header>
             <Tooltip anchorSelect=".menu-item" />
@@ -16,7 +15,7 @@ function Header() {
 
                 <div className="navbar">
                     <div className="ms-3">
-                        <h1 className="text-dark h1-header">
+                        <h1 className="h1-header text-light">
                             Road Sage
                         </h1>
                     </div>

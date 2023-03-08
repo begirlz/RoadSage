@@ -39,28 +39,19 @@ function MyTrips() {
   }
 
   return (
-    <div classname = 'fixed-center'>
-    <div class="d-flex flex-column mb-3">
-      <div class="p-2 justify-content-center">
-        <h2 class="text-center">My Trips</h2>
-        <p class="text-center">This is my trips page</p>
-      </div>
-      <div class="card-group">
-      {trips.map((trip) => (
-          // <li key={trip.id}>
-          //   <h4>{trip.title}</h4>
-          //   <p>{trip.description}</p>
-          //   <p>
-          //     {trip.date} at {trip.time}
-          //   </p>
-          // </li>
-          <div class="card" key={trip.id}>
-            <div class="card-body">
-              <h5 class="card-title">{trip.title}</h5>
-              <p class="card-text">{trip.description}</p>
-              <a href="#" class="card-link">Card link</a>
-            </div>
-          </div>
+    <div id="big-box" className="main-container">
+    <div id="small-box">
+
+      <h2>My Trips</h2>
+      <p>This is my trips page</p>
+        {trips.map((trip) => (
+          <li key={trip.id}>
+            <h4>{trip.title}</h4>
+            <p>{trip.description}</p>
+            <p>
+              {trip.date} at {trip.time}
+            </p>
+          </li>
         ))}
       </div>
 
@@ -107,7 +98,6 @@ function MyTrips() {
 
         <button type="button" class="btn btn-light">Add Trip</button>
       </form>
-    </div>
     </div>
   );
 }

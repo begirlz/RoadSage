@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
 
 body {
   margin: 0;
@@ -47,4 +50,40 @@ code {
 
 .hidden-spacer {
   height: 56px
+}
+
+.welcomeWord {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.welcomeWord div {
+  width: 100%;
+  height: 100%;
+}
+
+#big-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-align-items: center;
+}
+
+#small-box {
+  width: 60%;
+  height: 30%;
+  font-family: 'Indie Flower', cursive;
+}
+.peace {
+  font-family: 'Lobster', cursive;
+}
+.roadrage {
+  font-family: 'Kosugi Maru', sans-serif;
+}
+
+.main-container {
+  height:100vh;
+  width: 100vw!important;
+  min-height:400px;
 }
