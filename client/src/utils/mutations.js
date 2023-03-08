@@ -46,8 +46,12 @@ export const SAVE_TRIP = gql`
             username
             savedTrips {
                 tripId
-                locations
                 title
+                description
+                origin
+                destination
+                time
+                date
             }
         }
     }
@@ -61,8 +65,12 @@ export const REMOVE_TRIP = gql`
             email
             savedTrips {
                 tripId
-                locations
                 title
+                description
+                origin
+                destination
+                time
+                date
             }
         }
     }
