@@ -1,5 +1,8 @@
 import React, { useCallback, useRef, useState } from 'react'
 import { GoogleMap, useLoadScript, DirectionsRenderer, DirectionsService } from '@react-google-maps/api';
+import Auth from '../utils/auth';
+import { SAVE_TRIP } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
 
 // state means all the information of the variable of the component, setState means to change those values - then to = useState is the function from react letting them know this is a hook which purpose is to create reactive functions. 
 
@@ -41,6 +44,30 @@ function MyComponent() {
     }
   }
 
+  const [saveTrip] = useMutation(SAVE_TRIP);
+
+  const handleSaveTrip = async (originInput, destinationInput) => {
+  console.log(typeof originInput);
+    const SavedTripInput =  (originInput, destinationInput);
+    console.log(typeof SavedTripInput);
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      return false;
+    }
+    if (originInput === "" && destinationInput === "") {
+      console.error('You have not searched for any route');
+    }
+    try {
+      console.log('savetrip');
+      await saveTrip({
+        variables: { trip: SavedTripInput }
+      });
+    } catch (err) {
+      console.error(err);
+    } 
+  };
+
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: APIKey,
   })
@@ -62,14 +89,14 @@ function MyComponent() {
             <label htmlFor="txt_origin" className='col-lg-2 col-form-label'>
               <b>Origin :</b>
             </label>
-            <div className="col-lg-3 ">
-              <input className="form-control" type="text" id="txt_origin" placeholder='origin' ref={originInput} />
+            <div class="col-lg-3 ">
+              <input className="form-control" type="text" name='origin' id="txt_origin" placeholder='origin' ref={originInput} />
             </div>
             <label htmlFor="txt_destination" className='col-lg-2 col-form-label'>
               <b>Description:</b>
             </label>
-            <div className="col-lg-3">
-              <input className="form-control" type="text" id="txt_destination" placeholder='destination' ref={destinationInput} />
+            <div class="col-lg-3">
+              <input className="form-control" type="text" name="destination" id="txt_destination" placeholder='destination' ref={destinationInput} />
             </div>
             <div className='col-lg-2'>
               <button
@@ -77,6 +104,12 @@ function MyComponent() {
                 type='button'
                 onClick={searchRoute}>
                 Search
+              </button>
+              <button
+                className='btn btn-light'
+                type='button'
+                onClick={() => handleSaveTrip(originInput.current.value, destinationInput.current.value)}>
+                Save
               </button>
             </div>
           </div>

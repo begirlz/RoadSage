@@ -21,7 +21,7 @@ const userSchema = new Schema(
       required: true,
     },
     // set savedlist to be an array of data that adheres to the bookSchema
-    savedlist: [tripsSchema],
+    savedTrips: [tripsSchema],
   },
   // set this to use virtual below
   {
@@ -47,7 +47,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
 };
 
 userSchema.virtual('tripCount').get(function () {
-  return this.savedlist.length;
+  return this.savedTrips.length;
 });
 
 const User = model('User', userSchema);
