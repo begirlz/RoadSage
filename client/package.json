@@ -2,7 +2,7 @@
     "name": "roadsage-client",
     "version": "0.1.0",
     "private": true,
-    "proxy": "http://localhost:3001/",
+    "proxy": "http://localhost:3001",
     "dependencies": {
         "@apollo/client": "^3.7.9",
         "@react-google-maps/api": "^2.18.1",
@@ -13,6 +13,7 @@
         "graphql": "^16.6.0",
         "jwt-decode": "^3.1.2",
         "react": "^18.2.0",
+        "react-bootstrap": "^2.7.2",
         "react-dom": "^18.2.0",
         "react-router-dom": "^6.8.2",
         "react-scripts": "^5.0.1",

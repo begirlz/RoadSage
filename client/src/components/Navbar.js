@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";// no reloading page
 import '../css/bootstrap.css';
 import { Tooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
+import Auth from '../utils/auth';
+
+import { Nav, Modal, Tab } from 'react-bootstrap';
+import SignUpForm from './SignupForm';
+import LoginForm from './LoginForm';
 
 function Header() {
-
-    const [isCollapse, setisCollapse] = React.useState(false)
+    //Toggle hamburger menu
+    const [isCollapse, setisCollapse] = useState(false)
+    // set modal display state
+    const [showModal, setShowModal] = useState(false);
 
     return (
         <header>
@@ -35,7 +42,7 @@ function Header() {
 
                 <div className={`navbar-collapse ${isCollapse ? '' : 'collapse'} justify-content-end `}
                     id="navbarColor02">
-                        
+
                     <div className="navbar-nav d-flex me-sm-2 buger-menu">
                         <div className="my-2 my-sm-0">
                             <Link
@@ -66,7 +73,7 @@ function Header() {
                             </Link>
                         </div>
                     </div>
-                    
+
                     <div className="navbar-nav d-flex me-sm-2 buger-menu">
                         <div className="my-2 my-sm-0">
                             <Link
@@ -97,41 +104,85 @@ function Header() {
                             </Link>
                         </div>
                     </div>
-                    <div className="navbar-nav d-flex me-sm-2 buger-menu">
-                        <div className="my-2 my-sm-0">
-                            <Link
-                                to="Login"
-                                className=""
-                                spy="true"
-                                smooth="true"
-                            >
-                                <img className='card-img menu-item'
-                                    alt='login'
-                                    data-tooltip-content="Log In"
-                                    src='https://img.icons8.com/external-bearicons-detailed-outline-bearicons/64/null/external-login-call-to-action-bearicons-detailed-outline-bearicons.png' />
 
-                            </Link>
+                    {/* if user is logged in show saved books and logout */}
+                    {Auth.loggedIn() ? (
+                        <>
+                            <div className="navbar-nav d-flex me-sm-2 buger-menu">
+                                <div className="my-2 my-sm-0">
+                                    <Link
+                                        to="Logout"
+                                        className=""
+                                        spy="true"
+                                        smooth="true"
+                                        onClick={Auth.logout}
+                                    >
+                                        <img className='card-img menu-item'
+                                            alt='logout'
+                                            data-tooltip-content="Log Out"
+                                            src="https://img.icons8.com/carbon-copy/64/null/logout-rounded.png" />
+                                    </Link>
+                                </div>
+                            </div>
+                        </>
+                    ) : (
+                        <div className="navbar-nav d-flex me-sm-2 buger-menu">
+                            <div className="my-2 my-sm-0">
+                                <Link
+                                    to="Login"
+                                    className=""
+                                    spy="true"
+                                    smooth="true"
+                                    onClick={() => setShowModal(true)}
+                                >
+                                    <img className='card-img menu-item'
+                                        alt='login'
+                                        data-tooltip-content="Log In"
+                                        src='https://img.icons8.com/external-bearicons-detailed-outline-bearicons/64/null/external-login-call-to-action-bearicons-detailed-outline-bearicons.png' />
+
+                                </Link>
+                            </div>
                         </div>
-                    </div>
-                    <div className="navbar-nav d-flex me-sm-2 buger-menu">
-                        <div className="my-2 my-sm-0">
-                            <Link
-                                to="Logout"
-                                className=""
-                                spy="true"
-                                smooth="true"
-                            >
-                                <img className='card-img menu-item'
-                                    alt='logout'
-                                    data-tooltip-content="Log Out"
-                                    src="https://img.icons8.com/carbon-copy/64/null/logout-rounded.png" />
-                            </Link>
-                        </div>
-                    </div>
+                    )}
+
+
+
 
                 </div>
 
             </nav>
+            <Modal
+                animation={false}
+                size='lg'
+                show={showModal}
+                onHide={() => setShowModal(false)}
+                aria-labelledby='signup-modal'>
+                {/* tab container to do either signup or login component */}
+                <Tab.Container defaultActiveKey='login'>
+                    <Modal.Header closeButton>
+                        <Modal.Title id='signup-modal'>
+                            <Nav variant='pills'>
+                                <Nav.Item>
+                                    <Nav.Link eventKey='login'>Login</Nav.Link>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <Nav.Link eventKey='signup'>Sign Up</Nav.Link>
+                                </Nav.Item>
+                            </Nav>
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Tab.Content>
+                            <Tab.Pane eventKey='login'>
+                                <LoginForm handleModalClose={() => setShowModal(false)} />
+                            </Tab.Pane>
+                            <Tab.Pane eventKey='signup'>
+                                <SignUpForm handleModalClose={() => setShowModal(false)} />
+                            </Tab.Pane>
+                        </Tab.Content>
+                    </Modal.Body>
+                </Tab.Container>
+            </Modal>
         </header>
     );
 }
