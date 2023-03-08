@@ -55,13 +55,13 @@ function MyTrips() {
         ))}
 
         <form id="frm_search" className="mb-2" onSubmit={handleSubmit}>
-          <div class="form-group row d-flex align-items-center">
+          <div className="form-group row d-flex align-items-center">
             <label htmlFor="title"
               className='col-lg-2 col-form-label'
             >
               <b>Title: </b>
             </label>
-            <div class="col-lg-4 ">
+            <div className="col-lg-4 ">
               <input
                 className="form-control"
                 type="text"
@@ -73,7 +73,7 @@ function MyTrips() {
             <label htmlFor="description" className='col-lg-2 col-form-label'>
               <b>Description:</b>
             </label>
-            <div class="col-lg-4">
+            <div className="col-lg-4">
               <input
                 className="form-control"
                 type="text"
@@ -83,13 +83,13 @@ function MyTrips() {
               />
             </div>
           </div>
-          <div class="form-group row d-flex align-items-center">
+          <div className="form-group row d-flex align-items-center">
             <label htmlFor="date"
               className='col-lg-2 col-form-label'
             >
               <b> Date: </b>
             </label>
-            <div class="col-lg-4 ">       
+            <div className="col-lg-4 ">       
               <input
                 className="form-control"
                 type="date"
@@ -101,7 +101,7 @@ function MyTrips() {
             <label htmlFor="time" className='col-lg-2 col-form-label'>
               <b>Time: </b>
             </label>
-            <div class="col-lg-4">           
+            <div className="col-lg-4">           
               <input
                 className="form-control"
                 type="time"
@@ -112,7 +112,7 @@ function MyTrips() {
 
             </div>
           </div>
-          <div class="form-group row d-flex justify-content-end">
+          <div className="form-group row d-flex justify-content-end">
           <div className='col-lg-3'>
               <button
                 className='btn btn-light  w-100'
@@ -178,7 +178,7 @@ function MyTrips() {
               />
             </label>
           </div>
-          <button type="button" class="btn btn-light">Add Trip</button>
+          <button type="button" className="btn btn-light">Add Trip</button>
         </form> */}
       </div>
 

@@ -28,22 +28,25 @@ function Account() {
                 <h1>My Account</h1>
                 <form className="justify-content-center" id="frm_account" onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label for="txt_name">Name:</label>
-                        <input className="form-control" type="text" name="Name" defaultValue={name}
+                        <label htmlFor="txt_name">Name:</label>
+                        <input className="form-control" type="text" name="Name" 
+                        //defaultValue={name}
                             value={name} onChange={handleNameChange}
                         // onBlur={handleChange} 
                         />
                     </div>
                     <div className="form-group">
-                        <label for="txt_email">Email Address:</label>
-                        <input className="form-control" type="email" name="Email" defaultValue={email}
+                        <label htmlFor="txt_email">Email Address:</label>
+                        <input className="form-control" type="email" name="Email" 
+                        //defaultValue={email}
                             value={email} onChange={handleEmailChange}
                         // onBlur={handleChange} 
                         />
                     </div>
                     <div className="form-group">
-                        <label for="txt_password">Password:</label>
-                        <input className="form-control" type="password" name="Password" defaultValue={password}
+                        <label htmlFor="txt_password">Password:</label>
+                        <input className="form-control" type="password" name="Password" 
+                        //defaultValue={password}
                             value={password} onChange={handlePasswordChange}
                         // onBlur={handleChange} 
                         />
