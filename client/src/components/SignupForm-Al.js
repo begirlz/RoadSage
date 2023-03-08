@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 
+//import { createUser } from '../utils/API';
 import Auth from '../utils/auth';
-// import mutations
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from '../utils/mutations';
 
 const SignupForm = () => {
-  // set initial form state
-  const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
-  // set state for form validation
-  const [validated] = useState(false);
-  // set state for alert
-  const [showAlert, setShowAlert] = useState(false);
-
-  // use mutation
-  const [createUser] = useMutation(ADD_USER);
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
-  };
-
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
+    // set initial form state
+    const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
+    // set state for form validation
+    const [validated] = useState(false);
+    // set state for alert
+    const [showAlert, setShowAlert] = useState(false);
+  
+    // use mutation
+    const [createUser] = useMutation(ADD_USER);
+  
+    const handleInputChange = (event) => {
+      const { name, value } = event.target;
+      setUserFormData({ ...userFormData, [name]: value });
+    };
+  
+    const handleFormSubmit = async (event) => {
+      event.preventDefault();
 
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
@@ -33,12 +33,15 @@ const SignupForm = () => {
     }
 
     try {
-      const { data } = await createUser({
-        variables: { ...userFormData }
-      });
+      const response = await createUser(userFormData);
 
-      Auth.login(data.addUser.token)
+      if (!response.ok) {
+        throw new Error('something went wrong!');
+      }
 
+      const { token, user } = await response.json();
+      console.log(user);
+      Auth.login(token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
@@ -99,7 +102,6 @@ const SignupForm = () => {
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
         <Button
-        className='mt-sm-3 float-end col-lg-2'
           disabled={!(userFormData.username && userFormData.email && userFormData.password)}
           type='submit'
           variant='success'>

@@ -41,21 +41,46 @@ function MyComponent() {
     }
   }
 
-const { isLoaded } = useLoadScript({
-  googleMapsApiKey: APIKey,
-})
-if(!isLoaded){
-  return <p>loading...</p>
-}
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: APIKey,
+  })
+  if (!isLoaded) {
+    return <p>loading...</p>
+  }
 
   return (
     <div id="big-box" className="main-container">
-    <div class="" id="small-box">
-      {/* <LoadScript googleMapsApiKey={process.env.APIgooglemaps}> */}
-      {/* <LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}> */}
-        <input type="text" placeholder='origin' ref={originInput} />
+      <div class="" id="small-box">
+        {/* <LoadScript googleMapsApiKey={process.env.APIgooglemaps}> */}
+        {/* <LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}> */}
+        {/* <input type="text" placeholder='origin' ref={originInput} />
         <input type="text" placeholder='destination' ref={destinationInput} />
-        <button onClick={searchRoute}>Search </button>
+        <button onClick={searchRoute}>Search </button> */}
+
+        <form id="frm_search" className="mb-2">
+          <div class="form-group row d-flex align-items-center">
+            <label for="txt_origin" className='col-lg-2 col-form-label'>
+              <b>Origin :</b>
+            </label>
+            <div class="col-lg-3 ">
+              <input className="form-control" type="text" id="txt_origin" placeholder='origin' ref={originInput} />
+            </div>
+            <label htmlFor="txt_destination" className='col-lg-2 col-form-label'>
+              <b>Description:</b>
+            </label>
+            <div class="col-lg-3">
+              <input className="form-control" type="text" id="txt_destination" placeholder='destination' ref={destinationInput} />
+            </div>
+            <div className='col-lg-2'>
+              <button
+                className='btn btn-light'
+                type='button'
+                onClick={searchRoute}>
+                Search
+              </button>
+            </div>
+          </div>
+        </form>
 
         <GoogleMap
           // required
@@ -76,7 +101,7 @@ if(!isLoaded){
           }}
 
         >
-         {/* DirectionsService means its just searching and getting the data for the directions. 
+          {/* DirectionsService means its just searching and getting the data for the directions. 
            once the information gets back to the server it will run the callback function.
             the DirectionsService is like a fetch request in this instance of code. Once the directions have come back from the google maps, it will run.   */}
           {
@@ -109,8 +134,8 @@ if(!isLoaded){
             )
           }
         </GoogleMap>
-      {/* </LoadScript> */}
-    </div>
+        {/* </LoadScript> */}
+      </div>
     </div>
   )
 }

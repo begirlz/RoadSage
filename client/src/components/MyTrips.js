@@ -53,7 +53,79 @@ function MyTrips() {
             </p>
           </li>
         ))}
-        <form className="w-100"
+
+        <form id="frm_search" className="mb-2" onSubmit={handleSubmit}>
+          <div class="form-group row d-flex align-items-center">
+            <label htmlFor="title"
+              className='col-lg-2 col-form-label'
+            >
+              <b>Title: </b>
+            </label>
+            <div class="col-lg-4 ">
+              <input
+                className="form-control"
+                type="text"
+                id="title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
+            <label htmlFor="description" className='col-lg-2 col-form-label'>
+              <b>Description:</b>
+            </label>
+            <div class="col-lg-4">
+              <input
+                className="form-control"
+                type="text"
+                id="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
+          </div>
+          <div class="form-group row d-flex align-items-center">
+            <label htmlFor="date"
+              className='col-lg-2 col-form-label'
+            >
+              <b> Date: </b>
+            </label>
+            <div class="col-lg-4 ">       
+              <input
+                className="form-control"
+                type="date"
+                id="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+              />
+            </div>
+            <label htmlFor="time" className='col-lg-2 col-form-label'>
+              <b>Time: </b>
+            </label>
+            <div class="col-lg-4">           
+              <input
+                className="form-control"
+                type="time"
+                id="time"
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+              />
+
+            </div>
+          </div>
+          <div class="form-group row d-flex justify-content-end">
+          <div className='col-lg-3'>
+              <button
+                className='btn btn-light  w-100'
+                type='button'
+              //onClick={searchRoute}
+              >
+                Add Trip
+              </button>
+            </div>
+          </div>
+        </form>
+
+        {/* <form className="w-100"
           onSubmit={handleSubmit}>
           <div className="w-100">
             <div className="col-lg-3">
@@ -107,7 +179,7 @@ function MyTrips() {
             </label>
           </div>
           <button type="button" class="btn btn-light">Add Trip</button>
-        </form>
+        </form> */}
       </div>
 
 

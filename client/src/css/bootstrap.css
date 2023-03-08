@@ -64,11 +64,11 @@
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
   /* --bs-body-font-family: var(--bs-font-sans-serif); */
   --bs-body-font-family: var(--bs-font-custom);
-  --bs-body-font-size: 1rem;
+  --bs-body-font-size: 2rem; /*was 1rem*/
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
-  --bs-body-color: #adafae;
-  --bs-body-bg: #9CAF88;
+  --bs-body-color: #0e1f16; /*was something else*/
+  --bs-body-bg: #9CAF88; /*was something else*/
   --bs-border-width: 1px;
   --bs-border-style: solid;
   --bs-border-color: #dee2e6;
@@ -5298,7 +5298,7 @@ textarea.form-control-lg {
   --bs-modal-width: 500px;
   --bs-modal-padding: 1rem;
   --bs-modal-margin: 0.5rem;
-  --bs-modal-color: ;
+  --bs-modal-color: white;
   --bs-modal-bg: #222;
   --bs-modal-border-color: var(--bs-border-color-translucent);
   --bs-modal-border-width: 1px;
@@ -5543,14 +5543,6 @@ textarea.form-control-lg {
   }
   .modal-fullscreen-lg-down .modal-body {
     overflow-y: auto;
-  }
-  .navbar-expand-lg .navbar-collapse .buger-menu{
-    transform: scale(0.1);
-    height: 10px;
-    padding-bottom: 10%;
-  }
-  .h1-header {
-    font-size: 60px!important;
   }
 }
 @media (max-width: 1199.98px) {
