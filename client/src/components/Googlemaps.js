@@ -8,7 +8,7 @@ import { useMutation } from "@apollo/client";
 
 function MyComponent() {
   const APIKey = process.env.REACT_APP_API_KEY;
-  const [saveTrip] = useMutation(SAVE_TRIP);
+
   const [state, setState] = useState({
     response: null,
     travelMode: 'DRIVING',
@@ -44,20 +44,24 @@ function MyComponent() {
     }
   }
 
-  const handleSaveTrip = async function(res) {
+  const [saveTrip] = useMutation(SAVE_TRIP);
 
-    const tripToSave = { origin:originInput.current.value, destination:destinationInput.current.value };
+  const handleSaveTrip = async (originInput, destinationInput) => {
+  console.log(typeof originInput);
+    const SavedTripInput =  (originInput, destinationInput);
+    console.log(typeof SavedTripInput);
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
       return false;
     }
-    if (originInput.current.value !== "" && destinationInput.current.value !== "") {
+    if (originInput === "" && destinationInput === "") {
       console.error('You have not searched for any route');
     }
     try {
-      saveTrip({
-        variables: { trip: tripToSave }
+      console.log('savetrip');
+      await saveTrip({
+        variables: { trip: SavedTripInput }
       });
     } catch (err) {
       console.error(err);
@@ -86,13 +90,13 @@ function MyComponent() {
               <b>Origin :</b>
             </label>
             <div class="col-lg-3 ">
-              <input className="form-control" type="text" id="txt_origin" placeholder='origin' ref={originInput} />
+              <input className="form-control" type="text" name='origin' id="txt_origin" placeholder='origin' ref={originInput} />
             </div>
             <label htmlFor="txt_destination" className='col-lg-2 col-form-label'>
               <b>Description:</b>
             </label>
             <div class="col-lg-3">
-              <input className="form-control" type="text" id="txt_destination" placeholder='destination' ref={destinationInput} />
+              <input className="form-control" type="text" name="destination" id="txt_destination" placeholder='destination' ref={destinationInput} />
             </div>
             <div className='col-lg-2'>
               <button
@@ -104,7 +108,7 @@ function MyComponent() {
               <button
                 className='btn btn-light'
                 type='button'
-                onClick={handleSaveTrip}>
+                onClick={() => handleSaveTrip(originInput.current.value, destinationInput.current.value)}>
                 Save
               </button>
             </div>

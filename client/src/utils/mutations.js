@@ -40,10 +40,11 @@ export const ADD_USER = gql`
 `;
 
 export const SAVE_TRIP = gql`
-    mutation saveTrip($trip: SavedTripInput!) {
+    mutation saveTrip($trip: SavedTripInput) {
         saveTrip(trip: $trip) {
-            _id
             username
+            email
+            tripCount
             savedTrips {
                 tripId
                 title

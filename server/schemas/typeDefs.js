@@ -6,7 +6,7 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
-    savedlist: [Trip]
+    savedTrips: [Trip]
     tripCount: Int
   }
 
@@ -16,8 +16,8 @@ const typeDefs = gql`
     description: String
     origin: String
     destination: String
-    time: Int
-    date: Int
+    time: String
+    date: String
   }
 
   input SavedTripInput {
@@ -26,8 +26,8 @@ const typeDefs = gql`
     description: String
     origin: String
     destination: String
-    time: Int
-    date: Int
+    time: String
+    date: String
   }
 
   type Auth {
@@ -38,6 +38,7 @@ const typeDefs = gql`
   type Query {
     users: [User]
     user(username: String!): User
+    trips: [Trip]
   }
   type Query {
     me: User
@@ -46,7 +47,7 @@ const typeDefs = gql`
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    saveTrip(trip: SavedTripInput!, time: Int!, date: Int!, tripId: String!,description: String!, origin: String!, title: String!): User
+    saveTrip(trip: SavedTripInput): User
     removeTrip(tripId: String!): User
   }
 `;
