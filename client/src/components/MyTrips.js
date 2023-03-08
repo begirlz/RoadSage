@@ -44,8 +44,6 @@ function MyTrips() {
 
       <h2>My Trips</h2>
       <p>This is my trips page</p>
-
-      <ul>
         {trips.map((trip) => (
           <li key={trip.id}>
             <h4>{trip.title}</h4>
@@ -55,7 +53,7 @@ function MyTrips() {
             </p>
           </li>
         ))}
-      </ul>
+      </div>
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">
@@ -98,9 +96,8 @@ function MyTrips() {
           />
         </label>
 
-        <button type="submit">Add Trip</button>
+        <button type="button" class="btn btn-light">Add Trip</button>
       </form>
-    </div>
     </div>
   );
 }
