@@ -39,11 +39,11 @@ function MyTrips() {
   }
 
   return (
-    <div id="big-box" className="main-container">
-    <div id="small-box">
 
-      <h2>My Trips</h2>
-      <p>This is my trips page</p>
+    <div id="big-box" className="main-container col-lg-10 col-sm-10">
+      <div className="inner-container text-light">
+        <h2><strong>My Trips</strong></h2>
+        <p>This is my trips page</p>
         {trips.map((trip) => (
           <li key={trip.id}>
             <h4>{trip.title}</h4>
@@ -53,51 +53,64 @@ function MyTrips() {
             </p>
           </li>
         ))}
+        <form className="w-100"
+          onSubmit={handleSubmit}>
+          <div className="w-100">
+            <div className="col-lg-3">
+              <label htmlFor="title">
+                Title:
+                <input
+                  className="form-control"
+                  type="text"
+                  id="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </label>
+            </div>
+            <div className="col-lg-3">
+              <label htmlFor="description">
+                Description:
+                <input
+                  className="form-control"
+                  type="text"
+                  id="description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </label>
+            </div>
+          </div>
+
+          <div className="">
+            <label htmlFor="date">
+              Date:
+              <input
+                className="form-control"
+                type="date"
+                id="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+              />
+            </label>
+          </div>
+          <div className="">
+            <label htmlFor="time">
+              Time:
+              <input
+                className="form-control"
+                type="time"
+                id="time"
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+              />
+            </label>
+          </div>
+          <button type="button" class="btn btn-light">Add Trip</button>
+        </form>
       </div>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="title">
-          Title:
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </label>
 
-        <label htmlFor="description">
-          Description:
-          <input
-            type="text"
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </label>
-
-        <label htmlFor="date">
-          Date:
-          <input
-            type="date"
-            id="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
-        </label>
-
-        <label htmlFor="time">
-          Time:
-          <input
-            type="time"
-            id="time"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-          />
-        </label>
-
-        <button type="button" class="btn btn-light">Add Trip</button>
-      </form>
     </div>
   );
 }
