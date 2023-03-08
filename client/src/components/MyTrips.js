@@ -39,7 +39,9 @@ function MyTrips() {
   }
 
   return (
-    <div>
+    <div id="big-box" className="main-container">
+    <div id="small-box">
+
       <h2>My Trips</h2>
       <p>This is my trips page</p>
 
@@ -98,6 +100,7 @@ function MyTrips() {
 
         <button type="submit">Add Trip</button>
       </form>
+    </div>
     </div>
   );
 }

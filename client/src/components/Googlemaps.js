@@ -39,9 +39,10 @@ function MyComponent() {
     }
   }
   return (
-    <div class="container-fluid ">
-      <LoadScript googleMapsApiKey={process.env.APIgooglemaps}>
-
+    <div id="big-box" className="main-container">
+    <div class="" id="small-box">
+      {/* <LoadScript googleMapsApiKey={process.env.APIgooglemaps}> */}
+      <LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}>
         <input type="text" placeholder='origin' ref={originInput} />
         <input type="text" placeholder='destination' ref={destinationInput} />
         <button onClick={searchRoute}>Search </button>
@@ -60,10 +61,10 @@ function MyComponent() {
           zoom={2}
           // required
           center={{
-            // lat: 0,
-            // lng: -180
-            lat: 33.3080062,
-            lng: -111.8834117
+            lat: 0,
+            lng: -180
+            // lat: 33.3080062,
+            // lng: -111.8834117
           }}
 
         >
@@ -101,6 +102,7 @@ function MyComponent() {
           }
         </GoogleMap>
       </LoadScript>
+    </div>
     </div>
   )
 }
