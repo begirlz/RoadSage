@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 function MyTrips() {
   const [trips, setTrips] = useState([
     {
@@ -12,7 +11,6 @@ function MyTrips() {
       destination: "Los Angeles",
     },
   ]);
-
   const [id, setId] = useState(1);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -20,7 +18,6 @@ function MyTrips() {
   const [time, setTime] = useState("");
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
-
   function updateTrip() {
     const newTrip = {
       id: id,
@@ -40,7 +37,6 @@ function MyTrips() {
     setDate("");
     setTime("");
   }
-
   function deleteTrip(index) {
     const newTrips = [...trips];
     newTrips.splice(index, 1);
@@ -52,7 +48,6 @@ function MyTrips() {
     event.preventDefault();
     updateTrip();
   }
-
   return (
     <div id="big-box" className="main-container col-lg-10 col-sm-10">
       <div className="inner-container text-light">
@@ -69,7 +64,6 @@ function MyTrips() {
             </p>
           </li>
         ))}
-
         <form id="frm_search" className="mb-2" onSubmit={handleSubmit}>
           <div className="form-group row d-flex align-items-center">
             <label htmlFor="title" className="col-lg-2 col-form-label">
@@ -172,5 +166,4 @@ function MyTrips() {
     </div>
   );
 }
-
 export default MyTrips;

@@ -15,20 +15,28 @@ function Header() {
     // set modal display state
     const [showModal, setShowModal] = useState(false);
 
+    // const [isBackground, setisBackground] = useState(false)
+    const [isFixedTop, setisFixedTop] = useState()
+    window.onload = () => {
+        setisFixedTop(false);
+    }
     return (
         <header>
             <Tooltip anchorSelect=".menu-item" />
-            <nav className="navbar navbar-expand-lg mb-2 fixed-top text-muted">
 
-                <div className="navbar">
+            <nav className={`${isFixedTop ? '' : 'fixed-top'} 
+                navbar navbar-expand-lg mb-2 text-muted
+                `}
+            // "navbar navbar-expand-lg mb-2 fixed-top text-muted"
+            >
+                <div className="">
                     <div className="ms-3">
                         <h1 className="h1-header text-light">
                             Road Sage
                         </h1>
                     </div>
                 </div>
-
-                <button className={`navbar-toggler ${isCollapse ? '' : ''}`}
+                <button className={`navbar-nav navbar-toggler ${isCollapse ? '' : ''}`}
                     type="button"
                     onClick={() => {
                         setisCollapse(!isCollapse)
@@ -52,6 +60,9 @@ function Header() {
                                     className=""
                                     spy="true"
                                     smooth="true"
+                                    onClick={() => {
+                                        setisFixedTop(false);
+                                    }}
                                 >
                                     <img className='card-img menu-item'
                                         alt='Home'
@@ -69,6 +80,9 @@ function Header() {
                                     className=""
                                     spy="true"
                                     smooth="true"
+                                    onClick={() => {
+                                        setisFixedTop(true);
+                                    }}
                                 >
                                     <img className='card-img menu-item'
                                         alt='searchMaps'
@@ -84,6 +98,9 @@ function Header() {
                                     className=""
                                     spy="true"
                                     smooth="true"
+                                    onClick={() => {
+                                        setisFixedTop(true);
+                                    }}
                                 >
                                     <img className='card-img menu-item'
                                         alt='MyTrips'
@@ -92,7 +109,9 @@ function Header() {
                                 </Link>
                             </div>
                         </div>
-                        <div className="navbar-nav d-inline-flex me-sm-2 buger-menu">
+
+                        {/* Features */}
+                        {/* <div className="navbar-nav d-inline-flex me-sm-2 buger-menu">
                             <div className="my-2 my-sm-0">
                                 <Link
                                     to="Account"
@@ -106,7 +125,7 @@ function Header() {
                                         src="https://img.icons8.com/pastel-glyph/64/null/person-male--v2.png" />
                                 </Link>
                             </div>
-                        </div>
+                        </div> */}
 
                         {/* if user is logged in show saved books and logout */}
                         {Auth.loggedIn() ? (
@@ -150,6 +169,7 @@ function Header() {
                     </div>
                 </div>
             </nav>
+
             <Modal
                 animation={false}
                 centered
