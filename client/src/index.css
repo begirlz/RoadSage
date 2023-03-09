@@ -32,6 +32,14 @@ code {
   width: 100%;
   border-width: 0 0 1px; */
 }
+@media (max-width: 575.98px) {
+  .h1-header {
+    font-size: 40%!important;
+  } 
+  #small-box h1{
+    font-size: 40%!important;
+  }
+}
 
 @media screen and (max-width: 300px) {
 
@@ -114,6 +122,9 @@ code {
 @media screen and (max-width: 1400px) {
   .collapse-center {
     justify-content: center !important;
+  }
+   #small-box h1{
+    font-size: 70%!important;
   }
 }
 

@@ -42,6 +42,8 @@ function MyTrips() {
     newTrips.splice(index, 1);
     setTrips(newTrips);
   }
+  
+
   function handleSubmit(event) {
     event.preventDefault();
     updateTrip();
