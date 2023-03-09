@@ -171,4 +171,4 @@ function MyTrips() {
     </div>
   );
 }
-export default MyTrips;
+export default React.memo(MyTrips);
