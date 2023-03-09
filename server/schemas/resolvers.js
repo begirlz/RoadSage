@@ -4,7 +4,7 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    me: async (parent, args, context) => {
+    getMe: async (parent, args, context) => {
       if (context.user) {
         const data = await User.findOne({ _id: context.user._id })
           .select('-__v -password')
@@ -12,12 +12,14 @@ const resolvers = {
       }
       throw new AuthenticationError('Please log in');
     },
-    // users: async () => {
-    //   return User.find()
-    // },
-    // user: async (parent, { username }) => {
-    //   return User.findOne({ username })
-    // }
+    getTrips: async (parent, { _id }) => {
+          console.log('before find')
+          const data = await User.find(
+            {_id, _id},
+            {})
+          console.log(data);
+          return data;
+    }
   },
 
   Mutation: {
@@ -48,9 +50,9 @@ const resolvers = {
           { $addToSet: { savedTrips: trip } },
           { new: true, runValidators: true }
         );
-      return updatedUser;
-    }
-    throw new AuthenticationError("Please log in");
+        return updatedUser;
+      }
+      throw new AuthenticationError("Please log in");
     },
     // removeTrip: async (parent, { tripId }, context) => {
     //   const updatedUser = await User.findOneAndUpdate(

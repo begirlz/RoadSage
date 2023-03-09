@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from "react";
+import Auth from '../utils/auth';
+import { GET_TRIPS, GET_ME } from "../utils/queries";
+import { useMutation } from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import jwtDecode from 'jwt-decode';
+
 function MyTrips() {
   const [trips, setTrips] = useState([
     {
@@ -43,12 +49,51 @@ function MyTrips() {
     setTrips(newTrips);
   }
 
-
   function handleSubmit(event) {
     event.preventDefault();
     updateTrip();
   }
 
+  const token = localStorage.getItem('id_token');
+
+  console.log(token);
+    const decodedToken = jwtDecode(token);
+    let userId = decodedToken.data._id;
+  console.log(userId);
+  console.log(typeof userId);
+
+  // const { loading, meData } = useQuery(GET_ME);
+
+  //   const { loading: userLoading, error: userError, data: userData} = useQuery(GET_ME);
+  //   let userData = meData?.me || me;
+  const { loading, error, data } = useQuery(GET_TRIPS,
+    { variables: { _id: userId } }
+  );
+
+  console.log(data);
+
+  if (loading) return 'Loading...';
+  if (error) return `Error! ${error.message}`;
+
+  // const userTrips = data?.trips || {};
+  // const HandleSaveTrip = async (data) => {
+  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+  //   if (!token) {
+  //     alert('Please login');
+  //     return false;
+  //   }
+  //   try {
+  //     await getTrips({
+  //       // variables: { trip: {...SavedTripInput} }
+  //       variables: {}
+  //     });
+
+  //     alert('Trip loaded succesfully');
+
+  //   } catch (err) {
+  //     console.error(err);
+  // }}
 
   return (
     <div id="big-box" className="main-container">
@@ -58,8 +103,8 @@ function MyTrips() {
             <strong>My Trips</strong>
           </h2>
           <p>This is my trips page</p>
-          {trips.map((trip) => (
-            <li key={trip.id}>
+          {data.map((trip) => (
+            <li key={trip.tripId}>
               <h4>{trip.title}</h4>
               <p>{trip.description}</p>
               <p>
