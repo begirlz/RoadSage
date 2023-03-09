@@ -1,19 +1,5 @@
 import { gql } from '@apollo/client';
 
-// export const LOGIN_USER = gql`
-//     mutation login($email: String!, $password: String!) {
-//         login(email: $email, password: $password) {
-//             token
-//             user{
-//                 _id
-//                 username
-//                 email
-//                 password
-//             }
-//         }
-//     }    
-// `;
-
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -44,7 +30,6 @@ export const SAVE_TRIP = gql`
         saveTrip(trip: $trip) {
             username
             email
-            tripCount
             savedTrips {
                 tripId
                 title
@@ -54,6 +39,7 @@ export const SAVE_TRIP = gql`
                 time
                 date
             }
+            tripCount
         }
     }
 `;
