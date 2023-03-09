@@ -48,31 +48,37 @@ function MyComponent() {
   const [saveTrip] = useMutation(SAVE_TRIP);
 
   const handleSaveTrip = async (originInput, destinationInput) => {
-    console.log(originInput +"," + destinationInput);
-  // console.log(typeof originInput);
-    // const SavedTripInput =  (originInput, destinationInput);
+    console.log(originInput + "," + destinationInput);
+
     // const SavedTripInput =  {origin: originInput, destination: destinationInput};
-    // console.log(typeof SavedTripInput);
+
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-    // console.log(SavedTripInput);
-    // console.log({...SavedTripInput});
 
     if (!token) {
+      alert('Please login');
       return false;
     }
     if (originInput === "" && destinationInput === "") {
       console.error('You have not searched for any route');
     }
     try {
-      console.log('savetrip: ' + originInput +',' + destinationInput);
-
+      console.log('savetrip: ' + originInput + ',' + destinationInput);
       await saveTrip({
         // variables: { trip: {...SavedTripInput} }
-        variables: { trip: {tripId: '1', origin: originInput, destination: destinationInput} }
+        variables: {
+          trip: {
+            tripId: '1',
+            origin: originInput,
+            destination: destinationInput
+          }
+        }
       });
+
+      alert('Trip saved successfully');
+
     } catch (err) {
       console.error(err);
-    } 
+    }
   };
 
   const { isLoaded } = useLoadScript({
@@ -84,36 +90,49 @@ function MyComponent() {
 
   return (
     <div id="big-box" className="main-container">
-      <div  id="small-box">
+      <div id="small-box">
 
         <form id="frm_search" className="mb-2">
-          <div className="form-group row d-flex align-items-center">
-            <label htmlFor="txt_origin" className='col-lg-2 col-form-label'>
-              <b>Origin :</b>
-            </label>
-            <div className="col-lg-3 ">
-              <input className="form-control" type="text" name='origin' id="txt_origin" placeholder='origin' ref={originInput} />
+          <div className="form-group row d-flex align-items-center justify-content-center">
+            <div className='col-lg-2  form-label'>
+              <label htmlFor="txt_origin" className='w-100 col-form-label '>
+                <b>Origin :</b>
+              </label>
             </div>
-            <label htmlFor="txt_destination" className='col-lg-2 col-form-label'>
-              <b>Description:</b>
-            </label>
-            <div className="col-lg-3">
-              <input className="form-control" type="text" name="destination" id="txt_destination" placeholder='destination' ref={destinationInput} />
+            <div className="col-lg-4 ">
+              <input className="form-control w-100" type="text" name='origin' id="txt_origin" placeholder='origin' ref={originInput} />
             </div>
+            <div className='col-lg-2 form-label'>
+              <label htmlFor="txt_destination" className='w-100 col-form-label '>
+                <b>Destination: </b>
+              </label>
+            </div>
+            <div className="col-lg-4">
+              <input className="form-control w-100" type="text" name="destination" id="txt_destination" placeholder='destination' ref={destinationInput} />
+            </div>
+          </div>
+          <div className="form-group row d-flex justify-content-end">
             <div className='col-lg-2'>
               <button
-                className='btn btn-light'
+                className='btn btn-light w-100'
                 type='button'
                 onClick={searchRoute}>
                 Search
               </button>
-              <button
-                className='btn btn-light'
-                type='button'
-                onClick={() => handleSaveTrip(originInput.current.value, destinationInput.current.value)}>
-                Save
-              </button>
             </div>
+
+            {/* Allow only logged in user to save trip */}
+            {Auth.loggedIn() && (
+              <div className='col-lg-2'>
+                <button
+                  className='btn btn-light w-100'
+                  type='button'
+                  onClick={() => handleSaveTrip(originInput.current.value, destinationInput.current.value)}>
+                  Save
+                </button>
+              </div>
+            )}
+
           </div>
         </form>
 
