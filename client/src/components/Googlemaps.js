@@ -21,12 +21,13 @@ function MyComponent() {
 
   const originInput = useRef("")
   const destinationInput = useRef("")
-
+  const titleInput = useRef("")
+  const descriptionInput = useRef("")
   //   // purpose of a useRef is to connect an input with a variable
 
   //   // directionsCallback is importing useCallback to receive the info and run the function
-//   ATS added below code
-  const [tripDirections, setDirections] = useState ([])
+  //   ATS added below code
+  const [tripDirections, setDirections] = useState([])
   const directionsCallback = useCallback((res) => {
     console.log(res)
     if (res != null) {
@@ -37,10 +38,10 @@ function MyComponent() {
       setDirections(res.routes[0].legs[0].steps)
     }
   })
-// ats added 
+  // ats added 
   const createDirections = () => {
-    return tripDirections.map((item)=>{
-        return (<div>{parse(item.instructions)} <span>{item.distance.text}</span></div>) 
+    return tripDirections.map((item) => {
+      return (<div>{parse(item.instructions)} <span>{item.distance.text}</span></div>)
     })
   }
 
@@ -60,8 +61,8 @@ function MyComponent() {
 
   const [saveTrip] = useMutation(SAVE_TRIP);
 
-  const handleSaveTrip = async (originInput, destinationInput) => {
-    console.log(originInput + "," + destinationInput);
+  const handleSaveTrip = async (originInput, destinationInput, titleInput, descriptionInput) => {
+    console.log(originInput + "," + destinationInput + "," + titleInput + "," + descriptionInput);
 
     // const SavedTripInput =  {origin: originInput, destination: destinationInput};
 
@@ -82,7 +83,9 @@ function MyComponent() {
           trip: {
             tripId: '1',
             origin: originInput,
-            destination: destinationInput
+            destination: destinationInput,
+            title: titleInput,
+            description: descriptionInput,
           }
         }
       });
@@ -106,6 +109,22 @@ function MyComponent() {
       <div className="inner-container">
         <form id="frm_search" className="mb-2">
           <div className="form-group row d-flex align-items-center justify-content-center">
+            <div className='col-lg-2  form-label'>
+              <label htmlFor="txt_title" className='w-100 col-form-label '>
+                <b>Title :</b>
+              </label>
+            </div>
+            <div className="col-lg-4 ">
+              <input className="form-control w-100" type="text" name='title' id="txt_title" placeholder='title' ref={titleInput} />
+            </div>
+            <div className='col-lg-2  form-label'>
+              <label htmlFor="txt_description" className='w-100 col-form-label '>
+                <b>Description :</b>
+              </label>
+            </div>
+            <div className="col-lg-4 ">
+              <input className="form-control w-100" type="text" name='description' id="txt_description" placeholder='description' ref={descriptionInput} />
+            </div>
             <div className='col-lg-2  form-label'>
               <label htmlFor="txt_origin" className='w-100 col-form-label '>
                 <b>Origin :</b>
@@ -139,77 +158,77 @@ function MyComponent() {
                 <button
                   className='btn btn-light w-100'
                   type='button'
-                  onClick={() => handleSaveTrip(originInput.current.value, destinationInput.current.value)}>
+                  onClick={() => handleSaveTrip(originInput.current.value, destinationInput.current.value, titleInput.current.value, descriptionInput.current.value)}>
                   Save
                 </button>
               </div>
             )}
 
           </div>
-        </form>
+        </form >
 
-        <div class = "mapcontainer col">
-        <GoogleMap
-          // required
-          id='direction-example'
-          // required
-          mapContainerStyle={{
-            height: '500px',
-            width: '100%'
-          }}
-          // required
-          zoom={2}
-          // required
-          center={{
-            lat: 0,
-            lng: -180
-          }}
+        <div class="mapcontainer col">
+          <GoogleMap
+            // required
+            id='direction-example'
+            // required
+            mapContainerStyle={{
+              height: '500px',
+              width: '100%'
+            }}
+            // required
+            zoom={2}
+            // required
+            center={{
+              lat: 0,
+              lng: -180
+            }}
 
-        >
-          {/* DirectionsService means its just searching and getting the data for the directions. 
+          >
+            {/* DirectionsService means its just searching and getting the data for the directions. 
            once the information gets back to the server it will run the callback function.
             the DirectionsService is like a fetch request in this instance of code. Once the directions have come back from the google maps, it will run.   */}
-          {
-            (
-              state.destination !== '' &&
-              state.origin !== ''
-            ) && (
-              <DirectionsService
-                options={{
-                  destination: state.destination,
-                  origin: state.origin,
-                  travelMode: 'DRIVING'
-                }}
-                // required
-                callback={directionsCallback}
+            {
+              (
+                state.destination !== '' &&
+                state.origin !== ''
+              ) && (
+                <DirectionsService
+                  options={{
+                    destination: state.destination,
+                    origin: state.origin,
+                    travelMode: 'DRIVING'
+                  }}
+                  // required
+                  callback={directionsCallback}
 
-              />
-            )
-          }
-          {/* DirectionsRenderer will use the information from the DirectionsService to actually create/drawer the information in the map for the user. if the response is no longer equal to null then the directionRenderer will run and create a route.   */}
-          {
-            state.response !== null && (
-              <DirectionsRenderer
-                // required
-                options={{
-                  directions: state.response
-                }}
+                />
+              )
+            }
+            {/* DirectionsRenderer will use the information from the DirectionsService to actually create/drawer the information in the map for the user. if the response is no longer equal to null then the directionRenderer will run and create a route.   */}
+            {
+              state.response !== null && (
+                <DirectionsRenderer
+                  // required
+                  options={{
+                    directions: state.response
+                  }}
 
-              />
-            )
-          }
+                />
+              )
+            }
 
-        </GoogleMap>
-        {/* ATS added code 3/8/23 */}
-        <div class = "directionsContainer">
-          {
-            createDirections()
-          }
+          </GoogleMap>
+          {/* ATS added code 3/8/23 */}
+          <div class="directionsContainer">
+            {
+              createDirections()
+            }
+          </div>
         </div>
-        </div>
 
-      </div>
-    </div>
+      </div >
+    </div >
   )
 }
 
