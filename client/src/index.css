@@ -23,15 +23,15 @@ code {
   font-weight: bold !important;
 }
 
-.navbar {
-  /* background: transparent;
-  box-shadow: none; */
-  /* overflow: hidden;
+/* .navbar {
+  background: transparent;
+  box-shadow: none;
+  overflow: hidden;
   position: fixed!important;
   top: 0!important;
   width: 100%;
-  border-width: 0 0 1px; */
-}
+  border-width: 0 0 1px;
+} */
 @media (max-width: 575.98px) {
   .h1-header {
     font-size: 40%!important;
@@ -53,7 +53,13 @@ code {
     font-size: 150% !important;
   }
 
-  .navbar-expand-lg .navbar-collapse .buger-menu {
+  /* .navbar-expand-lg .navbar-collapse {
+    transform: scale(0.3);
+  } */
+  .burger {
+    height: 25px;
+  }
+  .menu-item {
     transform: scale(0.3);
   }
 }
@@ -71,7 +77,13 @@ code {
       font-size: 250% !important;
     }
 
-    .navbar-expand-lg .navbar-collapse .buger-menu {
+    /* .navbar-expand-lg .navbar-collapse {
+      transform: scale(0.3);
+    } */
+    .burger {
+      height: 30px;
+    }
+    .menu-item {
       transform: scale(0.3);
     }
   }
@@ -81,8 +93,9 @@ code {
   @media screen and (max-width: 900px) {
 
     h1,
-    body,
-    .menu-item {
+    body
+    /* ,.menu-item */
+     {
       font-size: 150% !important;
     }
 
@@ -90,12 +103,14 @@ code {
       font-size: 300% !important;
     }
 
-    .navbar-expand-lg .navbar-collapse .buger-menu {
+    /* .navbar-expand-lg  .navbar-collapse {
       transform: scale(0.3);
+    } */
+    .burger {
+      height: 40px;
     }
-
-    .navbar {
-      position: fixed;
+    .menu-item {
+      transform: scale(0.4);
     }
   }
 }
@@ -113,8 +128,14 @@ code {
       font-size: 400% !important;
     }
 
-    .navbar-expand-lg .navbar-collapse .buger-menu {
+    /* .navbar-expand-lg  .navbar-collapse{
       transform: scale(0.5);
+    } */
+    .burger {
+      height: 50px;
+    }
+    .menu-item {
+      transform: scale(0.6);
     }
   }
 }
@@ -167,8 +188,31 @@ code {
   min-height: 400px;
 }
 
-.main-container .inner-container {
+.inner-container {
   width: 60%;
-  height: 30%;
+  height: 20%;
 
+}
+.directionsContainer {
+  display:list-item, center;
+  align-items: center;
+  justify-content: center;
+  text-align: justify, center;
+  padding: 5vh;
+}
+
+#hide {
+  /* position: fixed;
+  top:50vh;
+  left:40vh; */
+}
+
+#height {
+  position: fixed;
+  top:5vh;
+  left:5vh;
+}
+
+#container {
+  min-height:200vh;
 }

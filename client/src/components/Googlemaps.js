@@ -103,8 +103,7 @@ function MyComponent() {
 
   return (
     <div id="big-box" className="main-container">
-      <div id="small-box">
-
+      <div className="inner-container">
         <form id="frm_search" className="mb-2">
           <div className="form-group row d-flex align-items-center justify-content-center">
             <div className='col-lg-2  form-label'>
@@ -208,7 +207,6 @@ function MyComponent() {
           }
         </div>
         </div>
-
 
       </div>
     </div>

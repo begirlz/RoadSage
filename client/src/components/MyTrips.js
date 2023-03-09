@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 function MyTrips() {
   const [trips, setTrips] = useState([
     {
@@ -42,28 +42,33 @@ function MyTrips() {
     newTrips.splice(index, 1);
     setTrips(newTrips);
   }
-  
+
 
   function handleSubmit(event) {
     event.preventDefault();
     updateTrip();
   }
+
+
   return (
-    <div id="big-box" className="main-container col-lg-10 col-sm-10">
+    <div id="big-box" className="main-container">
       <div className="inner-container text-light">
-        <h2>
-          <strong>My Trips</strong>
-        </h2>
-        <p>This is my trips page</p>
-        {trips.map((trip) => (
-          <li key={trip.id}>
-            <h4>{trip.title}</h4>
-            <p>{trip.description}</p>
-            <p>
-            {trip.origin} to {trip.destination} on {trip.date} at {trip.time}
-            </p>
-          </li>
-        ))}
+        <div>
+          <h2>
+            <strong>My Trips</strong>
+          </h2>
+          <p>This is my trips page</p>
+          {trips.map((trip) => (
+            <li key={trip.id}>
+              <h4>{trip.title}</h4>
+              <p>{trip.description}</p>
+              <p>
+                {trip.origin} to {trip.destination} on {trip.date} at {trip.time}
+              </p>
+            </li>
+          ))}
+        </div>
+
         <form id="frm_search" className="mb-2" onSubmit={handleSubmit}>
           <div className="form-group row d-flex align-items-center">
             <label htmlFor="title" className="col-lg-2 col-form-label">
