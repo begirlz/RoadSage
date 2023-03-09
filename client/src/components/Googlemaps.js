@@ -47,9 +47,8 @@ function MyComponent() {
   const [saveTrip] = useMutation(SAVE_TRIP);
 
   const handleSaveTrip = async (originInput, destinationInput) => {
-  console.log(typeof originInput);
-    const SavedTripInput =  (originInput, destinationInput);
-    console.log(typeof SavedTripInput);
+    console.log(originInput);
+    sessionStorage = {originInput, destinationInput};
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -61,7 +60,7 @@ function MyComponent() {
     try {
       console.log('savetrip');
       await saveTrip({
-        variables: { trip: SavedTripInput }
+        variables: { origin: sessionStorage.originInput, destination: sessionStorage.destinationInput }
       });
     } catch (err) {
       console.error(err);
