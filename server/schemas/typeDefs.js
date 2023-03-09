@@ -45,6 +45,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     saveTrip(trip: SavedTripInput): User
     removeTrip(tripId: String!): User
+    updateTrip(tripId: String!): User
   }
 `;
 
