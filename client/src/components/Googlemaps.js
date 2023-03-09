@@ -109,22 +109,25 @@ function MyComponent() {
       <div className="inner-container">
         <form id="frm_search" className="mb-2">
           <div className="form-group row d-flex align-items-center justify-content-center">
-            <div className='col-lg-2  form-label'>
-              <label htmlFor="txt_title" className='w-100 col-form-label '>
-                <b>Title :</b>
-              </label>
-            </div>
-            <div className="col-lg-4 ">
-              <input className="form-control w-100" type="text" name='title' id="txt_title" placeholder='title' ref={titleInput} />
-            </div>
-            <div className='col-lg-2  form-label'>
-              <label htmlFor="txt_description" className='w-100 col-form-label '>
-                <b>Description :</b>
-              </label>
-            </div>
-            <div className="col-lg-4 ">
-              <input className="form-control w-100" type="text" name='description' id="txt_description" placeholder='description' ref={descriptionInput} />
-            </div>
+            
+              
+                <div className='col-lg-2  form-label'>
+                  <label htmlFor="txt_title" className='w-100 col-form-label '>
+                    <b>Title :</b>
+                  </label>
+                </div>
+                <div className="col-lg-4 ">
+                  <input className="form-control w-100" type="text" name='title' id="txt_title" placeholder='title' ref={titleInput} />
+                </div>
+                <div className='col-lg-2  form-label'>
+                  <label htmlFor="txt_description" className='w-100 col-form-label '>
+                    <b>Description :</b>
+                  </label>
+                </div>
+                <div className="col-lg-4 ">
+                  <input className="form-control w-100" type="text" name='description' id="txt_description" placeholder='description' ref={descriptionInput} />
+                </div>
+
             <div className='col-lg-2  form-label'>
               <label htmlFor="txt_origin" className='w-100 col-form-label '>
                 <b>Origin :</b>
@@ -167,7 +170,7 @@ function MyComponent() {
           </div>
         </form >
 
-        <div class="mapcontainer col">
+        <div className="mapcontainer col">
           <GoogleMap
             // required
             id='direction-example'
@@ -220,6 +223,7 @@ function MyComponent() {
 
           </GoogleMap>
           {/* ATS added code 3/8/23 */}
+
           <ol class="directionsContainer">
             {
               createDirections()
