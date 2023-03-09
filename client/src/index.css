@@ -183,7 +183,7 @@ code {
 }
 
 .main-container {
-  height: 50vh;
+  height: 100vh;
   width: 100vw !important;
   min-height: 400px;
 }
