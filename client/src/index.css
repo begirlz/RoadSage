@@ -101,3 +101,11 @@ code {
 
   /* font-family: 'Indie Flower', cursive; */
 }
+
+.directionsContainer {
+  display:list-item, center;
+  align-items: center;
+  justify-content: center;
+  text-align: justify, center;
+  padding: 5vh;
+}

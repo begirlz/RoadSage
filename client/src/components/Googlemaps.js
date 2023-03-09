@@ -4,6 +4,9 @@ import Auth from '../utils/auth';
 import { SAVE_TRIP } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 
+// ats added 3/8
+import parse from "html-react-parser"
+
 // state means all the information of the variable of the component, setState means to change those values - then to = useState is the function from react letting them know this is a hook which purpose is to create reactive functions. 
 
 function MyComponent() {
@@ -22,14 +25,24 @@ function MyComponent() {
   //   // purpose of a useRef is to connect an input with a variable
 
   //   // directionsCallback is importing useCallback to receive the info and run the function
+//   ATS added below code
+  const [tripDirections, setDirections] = useState ([])
   const directionsCallback = useCallback((res) => {
+    console.log(res)
     if (res != null) {
       setState({
         response: res, origin: '',
         destination: ''
       })
+      setDirections(res.routes[0].legs[0].steps)
     }
   })
+// ats added 
+  const createDirections = () => {
+    return tripDirections.map((item)=>{
+        return (<div>{parse(item.instructions)} <span>{item.distance.text}</span></div>) 
+    })
+  }
 
   // we are using different variables to do the search in google maps and to store the users input information. the reason is we want to wait for the user to finish typing in the values in the search bar.
 
@@ -117,6 +130,7 @@ function MyComponent() {
           </div>
         </form>
 
+        <div class = "mapcontainer col">
         <GoogleMap
           // required
           id='direction-example'
@@ -166,10 +180,54 @@ function MyComponent() {
               />
             )
           }
+
         </GoogleMap>
+        {/* ATS added code 3/8/23 */}
+        <div class = "directionsContainer">
+          {
+            createDirections()
+          }
+        </div>
+        </div>
+
+
       </div>
     </div>
   )
 }
+
+// const request = {
+//     query: "Museum of Contemporary Art Australia",
+//     fields: ["name", "geometry"],
+//   };
+
+//   service = new google.maps.places.PlacesService(map);
+//   service.findPlaceFromQuery(request, (results, status) => {
+//     if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+//       for (let i = 0; i < results.length; i++) {
+//         createMarker(results[i]);
+//       }
+
+//       map.setCenter(results[0].geometry.location);
+//     }
+//   });
+// }
+
+// function createMarker(place) {
+//   if (!place.geometry || !place.geometry.location) return;
+
+//   const marker = new google.maps.Marker({
+//     map,
+//     position: place.geometry.location,
+//   });
+
+//   google.maps.event.addListener(marker, "click", () => {
+//     infowindow.setContent(place.name || "");
+//     infowindow.open(map);
+//   });
+// }
+
+// window.initMap = initMap;
+
 
 export default React.memo(MyComponent)
