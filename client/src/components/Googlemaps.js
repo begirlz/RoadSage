@@ -76,7 +76,7 @@ function MyComponent() {
 
   return (
     <div id="big-box" className="main-container">
-      <div class="" id="small-box">
+      <div  id="small-box">
         {/* <LoadScript googleMapsApiKey={process.env.APIgooglemaps}> */}
         {/* <LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}> */}
         {/* <input type="text" placeholder='origin' ref={originInput} />
@@ -84,8 +84,8 @@ function MyComponent() {
         <button onClick={searchRoute}>Search </button> */}
 
         <form id="frm_search" className="mb-2">
-          <div class="form-group row d-flex align-items-center">
-            <label for="txt_origin" className='col-lg-2 col-form-label'>
+          <div className="form-group row d-flex align-items-center">
+            <label htmlFor="txt_origin" className='col-lg-2 col-form-label'>
               <b>Origin :</b>
             </label>
             <div class="col-lg-3 ">
@@ -119,7 +119,7 @@ function MyComponent() {
           id='direction-example'
           // required
           mapContainerStyle={{
-            height: '400px',
+            height: '500px',
             width: '100%'
           }}
           // required
