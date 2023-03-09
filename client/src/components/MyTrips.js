@@ -70,10 +70,13 @@ function MyTrips() {
     { variables: { _id: userId } }
   );
 
-  console.log(data);
-
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
+
+  const tempData = data.getTrips[0].savedTrips;
+  console.log(typeof tempData);
+  console.log(tempData);
+  console.log(data.getTrips[0].savedTrips);
 
   // const userTrips = data?.trips || {};
   // const HandleSaveTrip = async (data) => {
@@ -103,8 +106,8 @@ function MyTrips() {
             <strong>My Trips</strong>
           </h2>
           <p>This is my trips page</p>
-          {data.map((trip) => (
-            <li key={trip.tripId}>
+          {tempData.map((trip) => (
+            <li key={trip._id}>
               <h4>{trip.title}</h4>
               <p>{trip.description}</p>
               <p>
