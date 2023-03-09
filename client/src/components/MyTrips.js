@@ -121,6 +121,13 @@ function MyTrips() {
               >
                 Add Trip
               </button>
+              <button
+                className='btn btn-light  w-100'
+                type='button'
+              //onClick={searchRoute}
+              >
+                Delete Trip
+              </button>
             </div>
           </div>
         </form>

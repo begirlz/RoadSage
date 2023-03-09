@@ -11,7 +11,7 @@ const typeDefs = gql`
   }
 
   type Trip {
-    tripId: String
+    tripId: ID
     title: String
     description: String
     origin: String
@@ -21,7 +21,7 @@ const typeDefs = gql`
   }
 
   input SavedTripInput {
-    tripId: String
+    tripId: ID
     title: String
     description: String
     origin: String

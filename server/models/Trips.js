@@ -4,7 +4,6 @@ const { Schema } = require('mongoose');
 const tripsSchema = new Schema({
   tripId: {
     type: String,
-    required: true,
   },
   title: {
     type: String,
