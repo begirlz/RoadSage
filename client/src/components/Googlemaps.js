@@ -1,5 +1,11 @@
 import React, { useCallback, useRef, useState } from 'react'
 import { GoogleMap, useLoadScript, DirectionsRenderer, DirectionsService } from '@react-google-maps/api';
+import Auth from '../utils/auth';
+import { SAVE_TRIP } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
+
+// ats added 3/8
+import parse from "html-react-parser"
 
 // state means all the information of the variable of the component, setState means to change those values - then to = useState is the function from react letting them know this is a hook which purpose is to create reactive functions. 
 
@@ -19,14 +25,24 @@ function MyComponent() {
   //   // purpose of a useRef is to connect an input with a variable
 
   //   // directionsCallback is importing useCallback to receive the info and run the function
+//   ATS added below code
+  const [tripDirections, setDirections] = useState ([])
   const directionsCallback = useCallback((res) => {
+    console.log(res)
     if (res != null) {
       setState({
         response: res, origin: '',
         destination: ''
       })
+      setDirections(res.routes[0].legs[0].steps)
     }
   })
+
+  const createDirections = () => {
+    return tripDirections.map((item)=>{
+        return (<div>{parse(item.instructions)} <span>{item.distance.text}</span></div>) 
+    })
+  }
 
   // we are using different variables to do the search in google maps and to store the users input information. the reason is we want to wait for the user to finish typing in the values in the search bar.
 
@@ -41,28 +57,84 @@ function MyComponent() {
     }
   }
 
-const { isLoaded } = useLoadScript({
-  googleMapsApiKey: APIKey,
-})
-if(!isLoaded){
-  return <p>loading...</p>
-}
+  const [saveTrip] = useMutation(SAVE_TRIP);
+
+  const handleSaveTrip = async (originInput, destinationInput) => {
+  console.log(typeof originInput);
+    const SavedTripInput =  (originInput, destinationInput);
+    console.log(typeof SavedTripInput);
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      return false;
+    }
+    if (originInput === "" && destinationInput === "") {
+      console.error('You have not searched for any route');
+    }
+    try {
+      console.log('savetrip');
+      await saveTrip({
+        variables: { trip: SavedTripInput }
+      });
+    } catch (err) {
+      console.error(err);
+    } 
+  };
+
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: APIKey,
+  })
+  if (!isLoaded) {
+    return <p>loading...</p>
+  }
 
   return (
     <div id="big-box" className="main-container">
-    <div class="" id="small-box">
-      {/* <LoadScript googleMapsApiKey={process.env.APIgooglemaps}> */}
-      {/* <LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}> */}
-        <input type="text" placeholder='origin' ref={originInput} />
+      <div  id="small-box">
+        {/* <LoadScript googleMapsApiKey={process.env.APIgooglemaps}> */}
+        {/* <LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}> */}
+        {/* <input type="text" placeholder='origin' ref={originInput} />
         <input type="text" placeholder='destination' ref={destinationInput} />
-        <button onClick={searchRoute}>Search </button>
+        <button onClick={searchRoute}>Search </button> */}
 
+        <form id="frm_search" className="mb-2">
+          <div className="form-group row d-flex align-items-center">
+            <label htmlFor="txt_origin" className='col-lg-2 col-form-label'>
+              <b>Origin :</b>
+            </label>
+            <div class="col-lg-3 ">
+              <input className="form-control" type="text" name='origin' id="txt_origin" placeholder='origin' ref={originInput} />
+            </div>
+            <label htmlFor="txt_destination" className='col-lg-2 col-form-label'>
+              <b>Description:</b>
+            </label>
+            <div class="col-lg-3">
+              <input className="form-control" type="text" name="destination" id="txt_destination" placeholder='destination' ref={destinationInput} />
+            </div>
+            <div className='col-lg-2'>
+              <button
+                className='btn btn-light'
+                type='button'
+                onClick={searchRoute}>
+                Search
+              </button>
+              <button
+                className='btn btn-light'
+                type='button'
+                onClick={() => handleSaveTrip(originInput.current.value, destinationInput.current.value)}>
+                Save
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <div class = "mapcontainer col">
         <GoogleMap
           // required
           id='direction-example'
           // required
           mapContainerStyle={{
-            height: '400px',
+            height: '500px',
             width: '100%'
           }}
           // required
@@ -76,7 +148,7 @@ if(!isLoaded){
           }}
 
         >
-         {/* DirectionsService means its just searching and getting the data for the directions. 
+          {/* DirectionsService means its just searching and getting the data for the directions. 
            once the information gets back to the server it will run the callback function.
             the DirectionsService is like a fetch request in this instance of code. Once the directions have come back from the google maps, it will run.   */}
           {
@@ -108,9 +180,18 @@ if(!isLoaded){
               />
             )
           }
+
         </GoogleMap>
-      {/* </LoadScript> */}
-    </div>
+        {/* ATS added code 3/8/23 */}
+        <div class = "directionsContainer">
+          {
+            createDirections()
+          }
+        </div>
+        </div>
+
+
+      </div>
     </div>
   )
 }

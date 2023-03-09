@@ -11,6 +11,7 @@ import Navbar from './components/Navbar';
 import Mytrips from './components/MyTrips';
 import Account from './components/Account';
 import Googlemaps from './components/Googlemaps';
+import LoginForm from './components/LoginForm';
 
 // GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -55,6 +56,10 @@ function App() {
             <Route
               exact path='/SearchTrips'
               element={<Googlemaps />}
+            />
+            <Route
+              exact path='/LoginForm'
+              element={<LoginForm />}
             />
             {/* <Route
               path='*'

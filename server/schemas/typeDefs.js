@@ -6,18 +6,28 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
+    savedTrips: [Trip]
+    tripCount: Int
   }
 
   type Trip {
     tripId: String
-    location: String
     title: String
+    description: String
+    origin: String
+    destination: String
+    time: String
+    date: String
   }
 
   input SavedTripInput {
     tripId: String
-    location: String
     title: String
+    description: String
+    origin: String
+    destination: String
+    time: String
+    date: String
   }
 
   type Auth {
@@ -28,12 +38,16 @@ const typeDefs = gql`
   type Query {
     users: [User]
     user(username: String!): User
+    trips: [Trip]
   }
+  type Query {
+    me: User
+}
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    saveTrip(trip: SavedTripInput!, tripId: String!, locations: String!, title: String!): User
+    saveTrip(trip: SavedTripInput): User
     removeTrip(tripId: String!): User
   }
 `;
