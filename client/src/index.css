@@ -70,7 +70,7 @@ code {
 #small-box {
   width: 60%;
   height: 30%;
-  font-family: 'Indie Flower', cursive;
+  /* font-family: 'Indie Flower', cursive; */
 }
 
 .peace {
@@ -83,7 +83,6 @@ code {
   height:100vh;
   width: 100vw!important;
   min-height:400px;
-  /* font-family: 'Indie Flower', cursive; */
 }
 .main-container .inner-container {
   width: 60%;
