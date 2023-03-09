@@ -62,3 +62,22 @@ export const REMOVE_TRIP = gql`
         }
     }
 `;
+
+export const UPDATE_TRIP = gql`
+    mutation updateTrip($trip: SavedTripInput) {
+        updateTrip(trip: $trip) {
+            username
+            email
+            savedTrips {
+                tripId
+                title
+                description
+                origin
+                destination
+                time
+                date
+            }
+            tripCount
+        }
+    }
+`;

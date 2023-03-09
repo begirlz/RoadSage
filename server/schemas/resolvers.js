@@ -72,6 +72,18 @@ const resolvers = {
         return updatedUser;
       }
     },
+    updateTrip: async (parent, { trip }, context) => {
+      console.log('mutation');
+      if (context.user) {
+        console.log('mutation');
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $set: { savedTrips: trip } },
+        );
+        return updatedUser;
+      }
+      throw new AuthenticationError("Please log in");
+    }
   },
 };
 

@@ -41,7 +41,7 @@ function MyComponent() {
   // ats added 
   const createDirections = () => {
     return tripDirections.map((item) => {
-      return (<div>{parse(item.instructions)} <span>{item.distance.text}</span></div>)
+      return (<li>{parse(item.instructions)} <span>{item.distance.text}</span></li>)
     })
   }
 
@@ -220,11 +220,11 @@ function MyComponent() {
 
           </GoogleMap>
           {/* ATS added code 3/8/23 */}
-          <div class="directionsContainer">
+          <ol class="directionsContainer">
             {
               createDirections()
             }
-          </div>
+          </ol>
         </div>
 
       </div >
