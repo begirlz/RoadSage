@@ -27,6 +27,14 @@ code {
   background: transparent;
   box-shadow: none;
 }
+@media (max-width: 575.98px) {
+  .h1-header {
+    font-size: 40%!important;
+  } 
+  #small-box h1{
+    font-size: 40%!important;
+  }
+}
 
 @media (max-width: 991.98px) {
   .navbar-expand-lg .navbar-collapse .buger-menu{
@@ -35,15 +43,18 @@ code {
     padding-bottom: 10%;
   }
   .h1-header {
-    font-size: 60px!important;
+    font-size: 80%!important;
   } 
   .collapse-center {
     justify-content: center!important;
   }
+   #small-box h1{
+    font-size: 70%!important;
+  }
 }
-@media (max-width: 1199.98px) {
+@media (min-width: 1199.98px) {
   .h1-header {
-    font-size: 80px!important;
+    font-size: 130px!important;
   } 
  }
 
