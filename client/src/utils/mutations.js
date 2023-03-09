@@ -44,7 +44,6 @@ export const SAVE_TRIP = gql`
         saveTrip(trip: $trip) {
             username
             email
-            tripCount
             savedTrips {
                 tripId
                 title
@@ -54,6 +53,7 @@ export const SAVE_TRIP = gql`
                 time
                 date
             }
+            tripCount
         }
     }
 `;

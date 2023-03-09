@@ -61,13 +61,15 @@ const resolvers = {
 
     //   return { token, user };
     // },
-    saveTrip: async (parent, { trip }, context) => {
-      console.log('mutation');
+    saveTrip: async (parent, {origin, destination} , context) => {
+      console.log('mutation1');
+      console.log(typeof origin);
+      console.log(origin);
       if (context.user) {
         console.log('mutation');
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { savedTrips: trip } },
+          { $addToSet: { savedTrips: {origin: origin, destination: destination} } },
           { new: true, runValidators: true }
         );
       return updatedUser;
