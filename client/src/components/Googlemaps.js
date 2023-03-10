@@ -41,7 +41,12 @@ function MyComponent() {
   // ats added 
   const createDirections = () => {
     return tripDirections.map((item) => {
-      return (<li>{parse(item.instructions)} <span>{item.distance.text}</span></li>)
+      console.log(tripDirections.length)
+      console.log(Object.keys(tripDirections))
+      return (
+      <li >{parse(item.instructions)} 
+      <span>{item.distance.text}</span>
+      </li>)
     })
   }
 
@@ -111,8 +116,8 @@ function MyComponent() {
           <div className='form-group d-flex align-items-center justify-content-center pb-1'>
             <div className='row d-flex justify-content-center'>
               <div className='col-lg-6'>
-                {Auth.loggedIn() && (
-                  <>
+                
+                 
                     <div className='row '>
                       <div className='col-lg-2 w-100'>
                         <label htmlFor="txt_title" className='w-100 col-form-label '>
@@ -133,8 +138,8 @@ function MyComponent() {
                         <input className="form-control w-100" type="text" name='description' id="txt_description" placeholder='description' ref={descriptionInput} />
                       </div>
                     </div>
-                  </>
-                )}
+                
+       
               </div>
               <div className='col-lg-6'>
                 <div className='row '>
@@ -248,7 +253,7 @@ function MyComponent() {
           </GoogleMap>
           {/* ATS added code 3/8/23 */}
 
-          <ol class="directionsContainer">
+          <ol className="directionsContainer">
             {
               createDirections()
             }
