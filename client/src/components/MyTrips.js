@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Auth from '../utils/auth';
-import { GET_TRIPS, GET_ME } from "../utils/queries";
+import { GET_TRIPS } from "../utils/queries";
+import { REMOVE_TRIP } from "../utils/mutations";
 import { useMutation } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import jwtDecode from 'jwt-decode';
 
 function MyTrips() {
+  const [deleteTrip] = useMutation(REMOVE_TRIP);
   const [trips, setTrips] = useState([
     {
       id: 1,
@@ -16,38 +18,25 @@ function MyTrips() {
       destination: "Los Angeles",
     },
   ]);
-  const [id, setId] = useState(1);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
- 
-  const [origin, setOrigin] = useState("");
-  const [destination, setDestination] = useState("");
-  function updateTrip() {
-    const newTrip = {
-      id: id,
-      title: title,
-      description: description,
-      origin: origin,
-      destination: destination,
-    };
-    setTrips([...trips, newTrip]);
-    setId(id + 1);
-    setTitle("");
-    setDescription("");
-    setOrigin("");
-    setDestination("");
+  const [trip, settrip] = useState({});
+  // const [title, setTitle] = useState();
+  // const [description, setDescription] = useState();
+  // const [origin, setOrigin] = useState();
+  // const [destination, setDestination] = useState();
+  function updateTrip(trip) {
+    settrip(trip);
+  }
+  // }
+  // function deleteTrip(index) {
+  //   const newTrips = [...trips];
+  //   newTrips.splice(index, 1);
+  //   setTrips(newTrips);
+  // }
 
-  }
-  function deleteTrip(index) {
-    const newTrips = [...trips];
-    newTrips.splice(index, 1);
-    setTrips(newTrips);
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    updateTrip();
-  }
+  // function handleSubmit(event) {
+  //   event.preventDefault();
+  //   updateTrip();
+  // }
 
   const token = localStorage.getItem('id_token');
 
@@ -73,25 +62,36 @@ function MyTrips() {
   console.log(tempData);
   console.log(data.getTrips[0].savedTrips);
 
-  // const userTrips = data?.trips || {};
-  // const HandleSaveTrip = async (data) => {
-  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
+ const handleDeleteTrip = async (tripId) => {
+    console.log(tripId);
 
-  //   if (!token) {
-  //     alert('Please login');
-  //     return false;
-  //   }
-  //   try {
-  //     await getTrips({
-  //       // variables: { trip: {...SavedTripInput} }
-  //       variables: {}
-  //     });
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-  //     alert('Trip loaded succesfully');
+    if (!token) {
+      alert('Please login');
+      return false;
+    }
+    try {
+      await deleteTrip({
+        // variables: { trip: {...SavedTripInput} }
+        variables: {
+          tripId
+        }
+      });
 
-  //   } catch (err) {
-  //     console.error(err);
-  // }}
+      alert('Trip deleted successfully');
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  // const handleUpdateTrip = async (trip) => {
+  //   let title = trip.title;
+  //   let description = trip.description;
+  //   let origin = trip.origin;
+  //   let destination = trip.destination;
+  //   console.log(title);
+  // };
 
   return (
     <div id="big-box" className="main-container">
@@ -109,13 +109,15 @@ function MyTrips() {
               <p>
                 {trip.origin} to {trip.destination}
               </p>
-              <button className="btn btn-light  w-100" onClick={() => deleteTrip(index)}>Delete Trip</button>
+              <button className="btn btn-light  w-100" onClick={() => handleDeleteTrip(trip.tripId)}>Delete Trip</button>
+              {/* <button className="btn btn-light  w-100">Delete Trip</button> */}
+              <button className="btn btn-light  w-100" onClick={() => updateTrip(trip)}>Update Trip</button>
             </li>
           ))}
           </ul>
         </div>
 
-        <form id="frm_search" className="mb-2" onSubmit={handleSubmit}>
+        <form id="frm_search" className="mb-2">
           <div className="form-group row d-flex align-items-center">
             <label htmlFor="title" className="col-lg-2 col-form-label">
               <b>Title: </b>
@@ -125,8 +127,8 @@ function MyTrips() {
                 className="form-control"
                 type="text"
                 id="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                value={trip.title}
+                // onChange={}
               />
             </div>
             <label htmlFor="description" className="col-lg-2 col-form-label">
@@ -137,8 +139,8 @@ function MyTrips() {
                 className="form-control"
                 type="text"
                 id="description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                value={trip.description}
+                // onChange={}
               />
             </div>
           </div>
@@ -151,8 +153,8 @@ function MyTrips() {
                 className="form-control"
                 type="text"
                 id="origin"
-                value={origin}
-                onChange={(e) => setOrigin(e.target.value)}
+                value={trip.origin}
+                // onChange={}
               />
             </div>
             <label htmlFor="destination" className="col-lg-2 col-form-label">
@@ -163,8 +165,8 @@ function MyTrips() {
                 className="form-control"
                 type="text"
                 id="destination"
-                value={destination}
-                onChange={(e) => setDestination(e.target.value)}
+                value={trip.destination}
+                // onChange={}
               />
             </div>
           </div>
@@ -179,16 +181,9 @@ function MyTrips() {
               <button
                 className="btn btn-light  w-100"
                 type="submit"
-                onClick={handleSubmit}
+                // onClick={handleSubmit}
               >
-                Update Trip
-              </button>
-              <button
-                className="btn btn-light  w-100"
-                type="button"
-                onClick={() => deleteTrip(trips.length - 1)}
-              >
-                Delete Trip
+                Save Trip
               </button>
             </div>
           </div>
@@ -196,5 +191,6 @@ function MyTrips() {
       </div>
     </div>
   );
+          
 }
 export default React.memo(MyTrips);

@@ -41,13 +41,13 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    saveTrip: async (parent, { trip }, context) => {
+    saveTrip: async (parent, { tripData }, context) => {
       console.log('mutation');
       if (context.user) {
         console.log('mutation');
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { savedTrips: trip } },
+          { $addToSet: { savedTrips: tripData } },
           { new: true, runValidators: true }
         );
         return updatedUser;
@@ -63,27 +63,28 @@ const resolvers = {
 
     // },
     removeTrip: async (parent, { tripId }, context) => {
+      console.log('mutation');
       if (context.user) {
+             console.log('mutation');
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedTrips: { tripId: tripId } } },
-          { new: true }
+          { $pull: { savedTrips: { tripId } } },
         );
         return updatedUser;
       }
     },
-    updateTrip: async (parent, { trip }, context) => {
-      console.log('mutation');
-      if (context.user) {
-        console.log('mutation');
-        const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $set: { savedTrips: trip } },
-        );
-        return updatedUser;
-      }
-      throw new AuthenticationError("Please log in");
-    }
+    // updateTrip: async (parent, { trip }, context) => {
+    //   console.log('mutation');
+    //   if (context.user) {
+    //     console.log('mutation');
+    //     const updatedUser = await User.findOneAndUpdate(
+    //       { _id: context.user._id },
+    //       { $set: { savedTrips: trip } },
+    //     );
+    //     return updatedUser;
+    //   }
+    //   throw new AuthenticationError("Please log in");
+    // }
   },
 };
 
