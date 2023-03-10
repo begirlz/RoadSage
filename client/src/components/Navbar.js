@@ -95,27 +95,28 @@ function Header() {
                             </Link>
                         </div>
                     </div>
-                    <div className="navbar-nav d-flex me-sm-2 align-items-end burger">
-                        <div className="my-2 my-sm-0">
-                            <Link
-                                to="SearchTrips"
-                                className=""
-                                spy="true"
-                                smooth="true"
-                            // onClick={() => {
-                            //     setisFixedTop(true);
-                            // }}
-                            >
-                                <img className='card-img menu-item'
-                                    alt='searchMaps'
-                                    data-tooltip-content="Search Maps"
-                                    src="https://img.icons8.com/external-smashingstocks-detailed-outline-smashing-stocks/64/null/external-map-location-summer-smashingstocks-detailed-outline-smashing-stocks.png" />
-                            </Link>
-                        </div>
-                    </div>
+
 
                     {Auth.loggedIn() ? (
                         <>
+                            <div className="navbar-nav d-flex me-sm-2 align-items-end burger">
+                                <div className="my-2 my-sm-0">
+                                    <Link
+                                        to="SearchTrips"
+                                        className=""
+                                        spy="true"
+                                        smooth="true"
+                                    // onClick={() => {
+                                    //     setisFixedTop(true);
+                                    // }}
+                                    >
+                                        <img className='card-img menu-item'
+                                            alt='searchMaps'
+                                            data-tooltip-content="Search Maps"
+                                            src="https://img.icons8.com/external-smashingstocks-detailed-outline-smashing-stocks/64/null/external-map-location-summer-smashingstocks-detailed-outline-smashing-stocks.png" />
+                                    </Link>
+                                </div>
+                            </div>
                             <div className="navbar-nav d-flex me-sm-2 align-items-end burger">
                                 <div className="my-2 my-sm-0">
                                     <Link
