@@ -80,8 +80,7 @@ function MyComponent() {
       await saveTrip({
         // variables: { trip: {...SavedTripInput} }
         variables: {
-          trip: {
-            tripId: '1',
+          tripData: {
             origin: originInput,
             destination: destinationInput,
             title: titleInput,
