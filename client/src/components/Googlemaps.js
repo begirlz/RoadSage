@@ -107,66 +107,90 @@ function MyComponent() {
   return (
     <div id="big-box" className="main-container">
       <div className="inner-container">
-        <form id="frm_search" className="mb-2">
-          <div className="form-group row d-flex align-items-center justify-content-center">
-            
-              
-                <div className='col-lg-2  form-label'>
-                  <label htmlFor="txt_title" className='w-100 col-form-label '>
-                    <b>Title :</b>
-                  </label>
+        <form id="frm_search" className="mb-2 ">
+          <div className='form-group d-flex align-items-center justify-content-center pb-1'>
+            <div className='row d-flex justify-content-center'>
+              <div className='col-lg-6'>
+                {Auth.loggedIn() && (
+                  <>
+                    <div className='row '>
+                      <div className='col-lg-2 w-100'>
+                        <label htmlFor="txt_title" className='w-100 col-form-label '>
+                          Title :
+                        </label>
+                      </div>
+                      <div className="col-lg-4 w-100 ">
+                        <input className="form-control " type="text" name='title' id="txt_title" placeholder='title' ref={titleInput} />
+                      </div>
+                    </div>
+                    <div className='row '>
+                      <div className='col-lg-2 w-100'>
+                        <label htmlFor="txt_description" className='w-100 col-form-label '>
+                          Description :
+                        </label>
+                      </div>
+                      <div className="col-lg-4 w-100 ">
+                        <input className="form-control w-100" type="text" name='description' id="txt_description" placeholder='description' ref={descriptionInput} />
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+              <div className='col-lg-6'>
+                <div className='row '>
+                  <div className='col-lg-2  w-100'>
+                    <label htmlFor="txt_origin" className='w-100 col-form-label '>
+                      Origin :
+                    </label>
+                  </div>
+                  <div className="col-lg-4 w-100">
+                    <input className="form-control" type="text" name='origin' id="txt_origin" placeholder='origin' ref={originInput} />
+                  </div>
                 </div>
-                <div className="col-lg-4 ">
-                  <input className="form-control w-100" type="text" name='title' id="txt_title" placeholder='title' ref={titleInput} />
+                <div className='row '>
+                  <div className='col-lg-2 w-100'>
+                    <label htmlFor="txt_destination" className='w-100 col-form-label '>
+                      Destination:
+                    </label>
+                  </div>
+                  <div className="col-lg-4 w-100">
+                    <input className="form-control" type="text" name="destination" id="txt_destination" placeholder='destination' ref={destinationInput} />
+                  </div>
                 </div>
-                <div className='col-lg-2  form-label'>
-                  <label htmlFor="txt_description" className='w-100 col-form-label '>
-                    <b>Description :</b>
-                  </label>
-                </div>
-                <div className="col-lg-4 ">
-                  <input className="form-control w-100" type="text" name='description' id="txt_description" placeholder='description' ref={descriptionInput} />
-                </div>
+                {/* <div className="form-group row d-flex justify-content-end"> */}
 
-            <div className='col-lg-2  form-label'>
-              <label htmlFor="txt_origin" className='w-100 col-form-label '>
-                <b>Origin :</b>
-              </label>
-            </div>
-            <div className="col-lg-4 ">
-              <input className="form-control w-100" type="text" name='origin' id="txt_origin" placeholder='origin' ref={originInput} />
-            </div>
-            <div className='col-lg-2 form-label'>
-              <label htmlFor="txt_destination" className='w-100 col-form-label '>
-                <b>Destination: </b>
-              </label>
-            </div>
-            <div className="col-lg-4">
-              <input className="form-control w-100" type="text" name="destination" id="txt_destination" placeholder='destination' ref={destinationInput} />
+              </div>
             </div>
           </div>
-          <div className="form-group row d-flex justify-content-end">
-            <div className='col-lg-2'>
-              <button
-                className='btn btn-light w-100'
-                type='button'
-                onClick={searchRoute}>
-                Search
-              </button>
-            </div>
-
-            {/* Allow only logged in user to save trip */}
-            {Auth.loggedIn() && (
-              <div className='col-lg-2'>
+          <div className='form-group '>
+            <div className='row d-flex justify-content-end'>
+              <div className='col-lg-2 '>
                 <button
                   className='btn btn-light w-100'
                   type='button'
-                  onClick={() => handleSaveTrip(originInput.current.value, destinationInput.current.value, titleInput.current.value, descriptionInput.current.value)}>
-                  Save
+                  onClick={searchRoute}>
+                  Search
                 </button>
               </div>
-            )}
-
+              {/* Allow only logged in user to save trip */}
+              {Auth.loggedIn() && (
+                <div className='col-lg-2'>
+                  <button
+                    className='btn btn-light w-100'
+                    type='button'
+                    onClick={() =>
+                      handleSaveTrip(
+                        originInput.current.value,
+                        destinationInput.current.value,
+                        titleInput.current.value,
+                        descriptionInput.current.value
+                      )}
+                  >
+                    Save
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </form >
 
