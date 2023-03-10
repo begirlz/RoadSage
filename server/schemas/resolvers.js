@@ -13,12 +13,12 @@ const resolvers = {
       throw new AuthenticationError('Please log in');
     },
     getTrips: async (parent, { _id }) => {
-          console.log('before find')
-          const data = await User.find(
-            {_id, _id},
-            {})
-          console.log(data);
-          return data;
+      console.log('before find')
+      const data = await User.find(
+        { _id, _id },
+        {})
+      console.log(data);
+      return data;
     }
   },
 
@@ -42,9 +42,9 @@ const resolvers = {
       return { token, user };
     },
     saveTrip: async (parent, { tripData }, context) => {
-      console.log('mutation');
+
       if (context.user) {
-        console.log('mutation');
+
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { savedTrips: tripData } },
@@ -54,18 +54,10 @@ const resolvers = {
       }
       throw new AuthenticationError("Please log in");
     },
-    // removeTrip: async (parent, { tripId }, context) => {
-    //   const updatedUser = await User.findOneAndUpdate(
-    //     { _id: user._id },
-    //     { $pull: { savedTrips: { tripId: tripId } } },
-    //     { new: true }
-    //   );
-
-    // },
     removeTrip: async (parent, { tripId }, context) => {
       console.log('mutation');
       if (context.user) {
-             console.log('mutation');
+        console.log('mutation');
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $pull: { savedTrips: { tripId } } },
@@ -73,13 +65,29 @@ const resolvers = {
         return updatedUser;
       }
     },
-    // updateTrip: async (parent, { trip }, context) => {
-    //   console.log('mutation');
+    updateTrip: async (parent, { tripData }, context) => {
+      console.log(tripData)
+      if (context.user) {
+        console.log(context.user);
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          {$set: { savedTrips: tripData } },
+          { new: true, runValidators: true }
+        );
+        return updatedUser;
+      }
+      throw new AuthenticationError("Please log in");
+    }
+    // updateTrip: async (parent, { tripData }, context) => {
+    //   console.log(tripData)
     //   if (context.user) {
-    //     console.log('mutation');
+    //     console.log(context.user);
     //     const updatedUser = await User.findOneAndUpdate(
     //       { _id: context.user._id },
-    //       { $set: { savedTrips: trip } },
+    //       {
+    //         $set: { savedTrips: tripData }            
+    //       },
+    //       { new: true, runValidators: true }
     //     );
     //     return updatedUser;
     //   }

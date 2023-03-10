@@ -29,7 +29,7 @@ function MyComponent() {
   //   ATS added below code
   const [tripDirections, setDirections] = useState([])
   const directionsCallback = useCallback((res) => {
-    console.log(res)
+
     if (res != null) {
       setState({
         response: res, origin: '',
@@ -41,10 +41,9 @@ function MyComponent() {
   // ats added 
   const createDirections = () => {
     return tripDirections.map((item) => {
-      console.log(tripDirections.length)
-      console.log(Object.keys(tripDirections))
+
       return (
-      <li >{parse(item.instructions)} 
+      <li key={tripDirections.indexOf(item)}>{parse(item.instructions)} 
       <span>{item.distance.text}</span>
       </li>)
     })
@@ -54,7 +53,6 @@ function MyComponent() {
 
   // setState in the searchRoute is to change the values in the state for the user input
   function searchRoute() {
-    console.log('search:' + originInput.current.value + destinationInput.current.value);
     if (originInput.current.value !== "" && destinationInput.current.value !== "") {
       setState({
         response: null,
@@ -67,9 +65,6 @@ function MyComponent() {
   const [saveTrip] = useMutation(SAVE_TRIP);
 
   const handleSaveTrip = async (originInput, destinationInput, titleInput, descriptionInput) => {
-    console.log(originInput + "," + destinationInput + "," + titleInput + "," + descriptionInput);
-
-    // const SavedTripInput =  {origin: originInput, destination: destinationInput};
 
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -81,7 +76,7 @@ function MyComponent() {
       console.error('You have not searched for any route');
     }
     try {
-      console.log('savetrip: ' + originInput + ',' + destinationInput);
+
       await saveTrip({
         // variables: { trip: {...SavedTripInput} }
         variables: {
@@ -134,7 +129,8 @@ function MyComponent() {
                         </label>
                       </div>
                       <div className="col-lg-4 w-100 ">
-                        <input className="form-control w-100" type="text" name='description' id="txt_description" placeholder='description' ref={descriptionInput} />
+                        <input className="form-control w-100" type="text" name='description' id="txt_description" placeholder='description' 
+                        ref={descriptionInput} />
                       </div>
                     </div>
                 
@@ -158,7 +154,8 @@ function MyComponent() {
                     </label>
                   </div>
                   <div className="col-lg-4 w-100">
-                    <input className="form-control" type="text" name="destination" id="txt_destination" placeholder='destination' ref={destinationInput} />
+                    <input className="form-control" type="text" name="destination" id="txt_destination" placeholder='destination' 
+                    ref={destinationInput} />
                   </div>
                 </div>
                 {/* <div className="form-group row d-flex justify-content-end"> */}
