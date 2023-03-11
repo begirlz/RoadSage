@@ -61,6 +61,7 @@ const resolvers = {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $pull: { savedTrips: { tripId } } },
+          { new: true}
         );
         return updatedUser;
       }
@@ -72,8 +73,9 @@ const resolvers = {
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           {$set: { savedTrips: tripData } },
-          { new: true, runValidators: true }
-        );
+          {new:true}
+        )
+
         return updatedUser;
       }
       throw new AuthenticationError("Please log in");

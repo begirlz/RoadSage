@@ -65,7 +65,7 @@ export const REMOVE_TRIP = gql`
 `;
 
 export const UPDATE_TRIP = gql`
-    mutation updateTrip($trip: SavedTripInput) {
+    mutation updateTrip($trip: UpdateTripInput) {
         updateTrip(trip: $trip) {
             username
             email

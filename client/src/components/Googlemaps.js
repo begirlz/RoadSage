@@ -43,9 +43,9 @@ function MyComponent() {
     return tripDirections.map((item) => {
 
       return (
-      <li key={tripDirections.indexOf(item)}>{parse(item.instructions)} 
-      <span>{item.distance.text}</span>
-      </li>)
+        <li key={tripDirections.indexOf(item)}>{parse(item.instructions)}
+          <span>{item.distance.text}</span>
+        </li>)
     })
   }
 
@@ -64,7 +64,13 @@ function MyComponent() {
 
   const [saveTrip] = useMutation(SAVE_TRIP);
 
-  const handleSaveTrip = async (originInput, destinationInput, titleInput, descriptionInput) => {
+
+  const handleSaveTrip = async (
+    originInput,
+    destinationInput,
+    titleInput,
+    descriptionInput
+    ) => {
 
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -110,31 +116,31 @@ function MyComponent() {
           <div className='form-group d-flex align-items-center justify-content-center pb-1'>
             <div className='row d-flex justify-content-center'>
               <div className='col-lg-6'>
-                
-                 
-                    <div className='row '>
-                      <div className='col-lg-2 w-100'>
-                        <label htmlFor="txt_title" className='w-100 col-form-label '>
-                          Title :
-                        </label>
-                      </div>
-                      <div className="col-lg-4 w-100 ">
-                        <input className="form-control " type="text" name='title' id="txt_title" placeholder='title' ref={titleInput} />
-                      </div>
-                    </div>
-                    <div className='row '>
-                      <div className='col-lg-2 w-100'>
-                        <label htmlFor="txt_description" className='w-100 col-form-label '>
-                          Description :
-                        </label>
-                      </div>
-                      <div className="col-lg-4 w-100 ">
-                        <input className="form-control w-100" type="text" name='description' id="txt_description" placeholder='description' 
-                        ref={descriptionInput} />
-                      </div>
-                    </div>
-                
-       
+
+
+                <div className='row '>
+                  <div className='col-lg-2 w-100'>
+                    <label htmlFor="txt_title" className='w-100 col-form-label '>
+                      Title :
+                    </label>
+                  </div>
+                  <div className="col-lg-4 w-100 ">
+                    <input className="form-control " type="text" name='title' id="txt_title" placeholder='title' ref={titleInput} />
+                  </div>
+                </div>
+                <div className='row '>
+                  <div className='col-lg-2 w-100'>
+                    <label htmlFor="txt_description" className='w-100 col-form-label '>
+                      Description :
+                    </label>
+                  </div>
+                  <div className="col-lg-4 w-100 ">
+                    <input className="form-control w-100" type="text" name='description' id="txt_description" placeholder='description'
+                      ref={descriptionInput} />
+                  </div>
+                </div>
+
+
               </div>
               <div className='col-lg-6'>
                 <div className='row '>
@@ -154,8 +160,8 @@ function MyComponent() {
                     </label>
                   </div>
                   <div className="col-lg-4 w-100">
-                    <input className="form-control" type="text" name="destination" id="txt_destination" placeholder='destination' 
-                    ref={destinationInput} />
+                    <input className="form-control" type="text" name="destination" id="txt_destination" placeholder='destination'
+                      ref={destinationInput} />
                   </div>
                 </div>
                 {/* <div className="form-group row d-flex justify-content-end"> */}

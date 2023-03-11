@@ -58,6 +58,8 @@ function MyTrips() {
   if (error) return `Error! ${error.message}`;
 
   const tempData = data.getTrips[0].savedTrips;
+  // console.log(data.getTrips[0].tripCount)
+  const tripCount = data.getTrips[0].tripCount;
 
   const handleDeleteTrip = async (tripId) => {
 
@@ -83,7 +85,7 @@ function MyTrips() {
     }
   };
   const handleUpdateTrip = async (trip) => {
-    
+
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -117,48 +119,48 @@ function MyTrips() {
   };
 
   return (
-    <div id="big-box" className="main-container">
-      <div className="inner-container text-light mb-5 pb-5">
-        <div className="text-light p-4 mb-4">
-          <h2 className="mb-0">
-            <strong>My Trips</strong>
-          </h2>
+    <div className="container-fluid d-flex justify-content-center"
+    // id="big-box" 
+    style={{paddingTop:'200px'}}
+    >
+      <div className="text-light mb-5 pb-5">
+        <div className="text-light p-4 mb-4 ">
+          <h4 className="mb-2">
+            <strong>My Trips:</strong>
+            <span> total {tripCount} trips</span>
+          </h4>
 
-          {/* <div className="">
+          <div className="d-flex flex-wrap justify-content-center ">
             {tempData.map((trip, index) => (
-              < div key={trip.tripId} className="py-3">
-                <h4>{trip.title}</h4>
-                <p>{trip.description}</p>
-                <p>
-                  {trip.origin} to {trip.destination}
-                </p>
-                <button className="btn btn-light  w-100" onClick={() => handleDeleteTrip(trip.tripId)}>Delete Trip</button>
-                 Comment this one <button className="btn btn-light  w-100">Delete Trip</button> 
-                <button className="btn btn-light  w-100" onClick={() => updateTripClick(trip)}>Update Trip</button>
-              </div>
-            ))}
-          </div> */}
 
-          {tempData.map((trip, index) => (
-            <div key={trip.tripId} className="card mx-2 col-lg-3 " >
-              <h3 className="card-header">
-                <strong>({trip.title})</strong>
-              </h3>
-              <div className="card-body d-flex flex-column" style={{ width: '100%' }}>
-                <div className='row'>
-                  <p>({trip.description})</p>
+              <div key={trip.tripId} className="card mx-2 mb-2 col-lg-4 " >
+                <div className="card-header">
+                  <strong>{trip.title}</strong>
                 </div>
-                <div className="card-footer d-flex justify-content-center mt-sm-auto">
-                  <button className="btn btn-light  w-100" onClick={() => handleDeleteTrip(trip.tripId)}>Delete Trip</button>
-                  <button className="btn btn-light  w-100" onClick={() => updateTripClick(trip)}>Update Trip</button>
+                <div className="card-body w-100" >
+                  <div className='row'>
+                    <p>{trip.description}</p>
+                  </div>
+                  <div>
+                    <p>From: {trip.origin} to {trip.destination}</p>
+                  </div>
+                </div>
+                <div className="card-footer d-flex justify-content-evenly">
+                  <div className="col-lg-3">
+                    <button className="btn btn-light w-100" onClick={() => handleDeleteTrip(trip.tripId)}>Delete Trip</button>
+                  </div>
+                  <div className="col-lg-3">
+                    <button className="btn btn-light w-100" onClick={() => updateTripClick(trip)}>Update Trip</button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+
+            ))}
+          </div>
         </div>
 
         <form id="frm_search" className="mb-2">
-          <div className="form-group row d-flex align-items-center">
+          <div className="form-group row d-flex align-items-center mb-2">
             <label htmlFor="title" className="col-lg-2 col-form-label">
               <b>Title: </b>
             </label>
@@ -186,7 +188,7 @@ function MyTrips() {
               />
             </div>
           </div>
-          <div className="form-group row d-flex align-items-center">
+          <div className="form-group row d-flex align-items-center mb-2">
             <label htmlFor="origin" className="col-lg-2 col-form-label">
               <b>Origin:</b>
             </label>
@@ -213,8 +215,6 @@ function MyTrips() {
               // onChange={}
               />
             </div>
-          </div>
-          <div className="form-group row d-flex align-items-center">
           </div>
           <div className="form-group row d-flex justify-content-end">
             <div className="col-lg-3">
