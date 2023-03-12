@@ -12,6 +12,7 @@ import Mytrips from './components/MyTrips';
 import Account from './components/Account';
 import Googlemaps from './components/Googlemaps';
 import LoginForm from './components/LoginForm';
+import Playlist from './components/Playlist';
 
 // GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -28,6 +29,9 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+{/* <button onClick={()=>setIsPlaying(!isPlaying)}>{!isPlaying? 'Play':'Stop'}</button>
+            <Sound url={Audio} playStatus={isPlaying?Sound.status.PLAYING: Sound.status.STOPPED} /> */}
+
 const client = new ApolloClient({
   uri: 'graphql',
   link: authLink.concat(httpLink),
@@ -40,9 +44,10 @@ function App() {
       <Router>
         <>
           <Navbar />
+          <Playlist></Playlist>
           <Routes>
             <Route
-              exact path="*"
+              exact path="/"
               element={<Home />}
             />
             <Route
