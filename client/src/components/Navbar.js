@@ -100,8 +100,8 @@ function Header() {
 
                 <div className={`navbar-collapse ${isCollapse ? '' : 'collapse'} justify-content-end navbar-brand`}
                     id="navbarColor02">
-                    <div class="float-end">
-                        <div className="btn menu-item">
+                    <div class="d-flex justify-content-end">
+                        <div className="btn ">
                             <Link
                                 to="Home"
                                 className=""
@@ -120,7 +120,7 @@ function Header() {
                         </div>
                         {Auth.loggedIn() ? (
                             <>
-                                <div className="btn menu-item">
+                                <div className="btn ">
                                     <Link
                                         to="SearchTrips"
                                         className=""
@@ -137,7 +137,7 @@ function Header() {
                                             src="https://img.icons8.com/external-smashingstocks-detailed-outline-smashing-stocks/64/null/external-map-location-summer-smashingstocks-detailed-outline-smashing-stocks.png" />
                                     </Link>
                                 </div>
-                                <div className="btn menu-item">
+                                <div className="btn ">
                                     <Link
                                         to="MyTrips"
                                         className=""
@@ -154,7 +154,7 @@ function Header() {
                                             src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/null/external-road-trip-travel-kmg-design-detailed-outline-kmg-design.png" />
                                     </Link>
                                 </div>
-                                <div className="btn menu-item">
+                                <div className="btn ">
                                     <Link
                                         to="Logout"
                                         className=""
@@ -175,7 +175,7 @@ function Header() {
                             </>
                         ) : (
 
-                            <div className="btn menu-item">
+                            <div className="btn ">
                                 <Link
                                     to="Login"
                                     className=""
