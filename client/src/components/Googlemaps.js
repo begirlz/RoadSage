@@ -111,12 +111,12 @@ function MyComponent() {
 
   return (
     <div className='container-fluid col-lg-10'>
-      <form id="frm_search" className="mb-2 ">
-        <div className='form-group d-flex align-items-center justify-content-center pb-1'>
-          <div className='row d-flex justify-content-center'>
+
+      <form id="frm_search" className="mb-2">
+
+        <div className='form-group row d-flex align-items-center justify-content-center'>
+          <div className='row d-flex justify-content-center mb-2'>
             <div className='col-lg-6'>
-
-
               <div className='row '>
                 <div className='col-lg-2 w-100'>
                   <label htmlFor="txt_title" className='w-100 col-form-label '>
@@ -164,15 +164,12 @@ function MyComponent() {
                 </div>
               </div>
               {/* <div className="form-group row d-flex justify-content-end"> */}
-
             </div>
           </div>
-        </div>
-        <div className='form-group '>
           <div className='row d-flex justify-content-end'>
-            <div className='col-lg-2 '>
+            <div className='col-lg-2 mb-2'>
               <button
-                className='btn btn-light w-100'
+                className='btn btn-dark w-100'
                 type='button'
                 onClick={searchRoute}>
                 Search
@@ -182,7 +179,7 @@ function MyComponent() {
             {Auth.loggedIn() && (
               <div className='col-lg-2'>
                 <button
-                  className='btn btn-light w-100'
+                  className='btn btn-dark w-100'
                   type='button'
                   onClick={() =>
                     handleSaveTrip(
@@ -261,13 +258,6 @@ function MyComponent() {
         </ol>
       </div>
     </div>
-
-    // <div id="big-box" className="main-container">
-    //   <div className="inner-container">
-
-
-    //   </div >
-    // </div >
   )
 }
 
