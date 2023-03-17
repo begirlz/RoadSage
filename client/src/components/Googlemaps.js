@@ -70,7 +70,7 @@ function MyComponent() {
     destinationInput,
     titleInput,
     descriptionInput
-    ) => {
+  ) => {
 
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -110,160 +110,164 @@ function MyComponent() {
   }
 
   return (
-    <div id="big-box" className="main-container">
-      <div className="inner-container">
-        <form id="frm_search" className="mb-2 ">
-          <div className='form-group d-flex align-items-center justify-content-center pb-1'>
-            <div className='row d-flex justify-content-center'>
-              <div className='col-lg-6'>
+    <div className='container-fluid col-lg-10'>
+      <form id="frm_search" className="mb-2 ">
+        <div className='form-group d-flex align-items-center justify-content-center pb-1'>
+          <div className='row d-flex justify-content-center'>
+            <div className='col-lg-6'>
 
 
-                <div className='row '>
-                  <div className='col-lg-2 w-100'>
-                    <label htmlFor="txt_title" className='w-100 col-form-label '>
-                      Title :
-                    </label>
-                  </div>
-                  <div className="col-lg-4 w-100 ">
-                    <input className="form-control " type="text" name='title' id="txt_title" placeholder='title' ref={titleInput} />
-                  </div>
+              <div className='row '>
+                <div className='col-lg-2 w-100'>
+                  <label htmlFor="txt_title" className='w-100 col-form-label '>
+                    Title :
+                  </label>
                 </div>
-                <div className='row '>
-                  <div className='col-lg-2 w-100'>
-                    <label htmlFor="txt_description" className='w-100 col-form-label '>
-                      Description :
-                    </label>
-                  </div>
-                  <div className="col-lg-4 w-100 ">
-                    <input className="form-control w-100" type="text" name='description' id="txt_description" placeholder='description'
-                      ref={descriptionInput} />
-                  </div>
+                <div className="col-lg-4 w-100 ">
+                  <input className="form-control " type="text" name='title' id="txt_title" placeholder='title' ref={titleInput} />
                 </div>
-
-
               </div>
-              <div className='col-lg-6'>
-                <div className='row '>
-                  <div className='col-lg-2  w-100'>
-                    <label htmlFor="txt_origin" className='w-100 col-form-label '>
-                      Origin :
-                    </label>
-                  </div>
-                  <div className="col-lg-4 w-100">
-                    <input className="form-control" type="text" name='origin' id="txt_origin" placeholder='origin' ref={originInput} />
-                  </div>
+              <div className='row '>
+                <div className='col-lg-2 w-100'>
+                  <label htmlFor="txt_description" className='w-100 col-form-label '>
+                    Description :
+                  </label>
                 </div>
-                <div className='row '>
-                  <div className='col-lg-2 w-100'>
-                    <label htmlFor="txt_destination" className='w-100 col-form-label '>
-                      Destination:
-                    </label>
-                  </div>
-                  <div className="col-lg-4 w-100">
-                    <input className="form-control" type="text" name="destination" id="txt_destination" placeholder='destination'
-                      ref={destinationInput} />
-                  </div>
+                <div className="col-lg-4 w-100 ">
+                  <input className="form-control w-100" type="text" name='description' id="txt_description" placeholder='description'
+                    ref={descriptionInput} />
                 </div>
-                {/* <div className="form-group row d-flex justify-content-end"> */}
-
               </div>
+
+
+            </div>
+            <div className='col-lg-6'>
+              <div className='row '>
+                <div className='col-lg-2  w-100'>
+                  <label htmlFor="txt_origin" className='w-100 col-form-label '>
+                    Origin :
+                  </label>
+                </div>
+                <div className="col-lg-4 w-100">
+                  <input className="form-control" type="text" name='origin' id="txt_origin" placeholder='origin' ref={originInput} />
+                </div>
+              </div>
+              <div className='row '>
+                <div className='col-lg-2 w-100'>
+                  <label htmlFor="txt_destination" className='w-100 col-form-label '>
+                    Destination:
+                  </label>
+                </div>
+                <div className="col-lg-4 w-100">
+                  <input className="form-control" type="text" name="destination" id="txt_destination" placeholder='destination'
+                    ref={destinationInput} />
+                </div>
+              </div>
+              {/* <div className="form-group row d-flex justify-content-end"> */}
+
             </div>
           </div>
-          <div className='form-group '>
-            <div className='row d-flex justify-content-end'>
-              <div className='col-lg-2 '>
+        </div>
+        <div className='form-group '>
+          <div className='row d-flex justify-content-end'>
+            <div className='col-lg-2 '>
+              <button
+                className='btn btn-light w-100'
+                type='button'
+                onClick={searchRoute}>
+                Search
+              </button>
+            </div>
+            {/* Allow only logged in user to save trip */}
+            {Auth.loggedIn() && (
+              <div className='col-lg-2'>
                 <button
                   className='btn btn-light w-100'
                   type='button'
-                  onClick={searchRoute}>
-                  Search
+                  onClick={() =>
+                    handleSaveTrip(
+                      originInput.current.value,
+                      destinationInput.current.value,
+                      titleInput.current.value,
+                      descriptionInput.current.value
+                    )}
+                >
+                  Save
                 </button>
               </div>
-              {/* Allow only logged in user to save trip */}
-              {Auth.loggedIn() && (
-                <div className='col-lg-2'>
-                  <button
-                    className='btn btn-light w-100'
-                    type='button'
-                    onClick={() =>
-                      handleSaveTrip(
-                        originInput.current.value,
-                        destinationInput.current.value,
-                        titleInput.current.value,
-                        descriptionInput.current.value
-                      )}
-                  >
-                    Save
-                  </button>
-                </div>
-              )}
-            </div>
+            )}
           </div>
-        </form >
+        </div>
+      </form >
 
-        <div className="mapcontainer col">
-          <GoogleMap
-            // required
-            id='direction-example'
-            // required
-            mapContainerStyle={{
-              height: '500px',
-              width: '100%'
-            }}
-            // required
-            zoom={2}
-            // required
-            center={{
-              lat: 0,
-              lng: -180
-            }}
+      <div className="mapcontainer col">
+        <GoogleMap
+          // required
+          id='direction-example'
+          // required
+          mapContainerStyle={{
+            height: '500px',
+            width: '100%'
+          }}
+          // required
+          zoom={2}
+          // required
+          center={{
+            lat: 0,
+            lng: -180
+          }}
 
-          >
-            {/* DirectionsService means its just searching and getting the data for the directions. 
+        >
+          {/* DirectionsService means its just searching and getting the data for the directions. 
            once the information gets back to the server it will run the callback function.
             the DirectionsService is like a fetch request in this instance of code. Once the directions have come back from the google maps, it will run.   */}
-            {
-              (
-                state.destination !== '' &&
-                state.origin !== ''
-              ) && (
-                <DirectionsService
-                  options={{
-                    destination: state.destination,
-                    origin: state.origin,
-                    travelMode: 'DRIVING'
-                  }}
-                  // required
-                  callback={directionsCallback}
+          {
+            (
+              state.destination !== '' &&
+              state.origin !== ''
+            ) && (
+              <DirectionsService
+                options={{
+                  destination: state.destination,
+                  origin: state.origin,
+                  travelMode: 'DRIVING'
+                }}
+                // required
+                callback={directionsCallback}
 
-                />
-              )
-            }
-            {/* DirectionsRenderer will use the information from the DirectionsService to actually create/drawer the information in the map for the user. if the response is no longer equal to null then the directionRenderer will run and create a route.   */}
-            {
-              state.response !== null && (
-                <DirectionsRenderer
-                  // required
-                  options={{
-                    directions: state.response
-                  }}
+              />
+            )
+          }
+          {/* DirectionsRenderer will use the information from the DirectionsService to actually create/drawer the information in the map for the user. if the response is no longer equal to null then the directionRenderer will run and create a route.   */}
+          {
+            state.response !== null && (
+              <DirectionsRenderer
+                // required
+                options={{
+                  directions: state.response
+                }}
 
-                />
-              )
-            }
+              />
+            )
+          }
 
-          </GoogleMap>
-          {/* ATS added code 3/8/23 */}
+        </GoogleMap>
+        {/* ATS added code 3/8/23 */}
 
-          <ol className="directionsContainer">
-            {
-              createDirections()
-            }
-          </ol>
-        </div>
+        <ol className="directionsContainer">
+          {
+            createDirections()
+          }
+        </ol>
+      </div>
+    </div>
 
-      </div >
-    </div >
+    // <div id="big-box" className="main-container">
+    //   <div className="inner-container">
+
+
+    //   </div >
+    // </div >
   )
 }
 

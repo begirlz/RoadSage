@@ -67,16 +67,14 @@ export const REMOVE_TRIP = gql`
 export const UPDATE_TRIP = gql`
     mutation updateTrip($trip: UpdateTripInput) {
         updateTrip(trip: $trip) {
+            _id
             username
-            email
             savedTrips {
                 tripId
                 title
                 description
                 origin
                 destination
-                time
-                date
             }
             tripCount
         }

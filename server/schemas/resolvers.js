@@ -12,13 +12,15 @@ const resolvers = {
       }
       throw new AuthenticationError('Please log in');
     },
-    getTrips: async (parent, { _id }) => {
+    getTrips: async (parent, { _id }, context) => {
       console.log('before find')
-      const data = await User.find(
-        { _id, _id },
-        {})
-      console.log(data);
-      return data;
+      if (context.user) {
+        const data = await User.find(
+          { _id, _id },
+          {})
+        console.log(data);
+        return data;
+      }
     }
   },
 
@@ -42,7 +44,7 @@ const resolvers = {
       return { token, user };
     },
     saveTrip: async (parent, { tripData }, context) => {
-
+      console.log('save trip mutation');
       if (context.user) {
 
         const updatedUser = await User.findOneAndUpdate(
@@ -55,46 +57,33 @@ const resolvers = {
       throw new AuthenticationError("Please log in");
     },
     removeTrip: async (parent, { tripId }, context) => {
-      console.log('mutation');
+      console.log('remove trip mutation');
+
       if (context.user) {
         console.log('mutation');
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $pull: { savedTrips: { tripId } } },
-          { new: true}
+          { new: true }
         );
         return updatedUser;
       }
     },
-    updateTrip: async (parent, { tripData }, context) => {
-      console.log(tripData)
+    updateTrip: async (parent, { trip }, context) => {
+      console.log('Update Trip mutation')
+
       if (context.user) {
         console.log(context.user);
         const updatedUser = await User.findOneAndUpdate(
-          { _id: context.user._id },
-          {$set: { savedTrips: tripData } },
-          {new:true}
+          { _id: context.user._id, 'savedTrips.tripId': trip.tripId },
+          { $set: { 'savedTrips.$': trip } },
+          {new:true, runValidators: true }
         )
 
         return updatedUser;
       }
       throw new AuthenticationError("Please log in");
     }
-    // updateTrip: async (parent, { tripData }, context) => {
-    //   console.log(tripData)
-    //   if (context.user) {
-    //     console.log(context.user);
-    //     const updatedUser = await User.findOneAndUpdate(
-    //       { _id: context.user._id },
-    //       {
-    //         $set: { savedTrips: tripData }            
-    //       },
-    //       { new: true, runValidators: true }
-    //     );
-    //     return updatedUser;
-    //   }
-    //   throw new AuthenticationError("Please log in");
-    // }
   },
 };
 

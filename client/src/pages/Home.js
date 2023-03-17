@@ -2,14 +2,6 @@ import React from "react";
 
 const Home = () => {
 
-  const pageName = window.location.pathname;
-
-  if (pageName === "/") {
-    document.body.classList.add("homepage", "d-flex", "justify-content-center", "align-items-center");
-  }
-  
-console.log(window.location.pathname)
-
   return (
 
     <div className="d-flex justify-content-center">

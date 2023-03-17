@@ -94,17 +94,18 @@ function MyTrips() {
     }
     try {
       console.log('handleUpdateTrip')
-      console.log(trip)
+      console.log(trip.tripId, titleInput.current.value,descriptionInput.current.value,
+        originInput.current.value,destinationInput.current.value,);
 
       await updateTrip({
         // variables: { trip: {...SavedTripInput} }
-        variables: {
-          trip: {
+        variables: { 
+          trip: {        
             tripId: trip.tripId,
-            origin: originInput.current.value,
-            destination: destinationInput.current.value,
             title: titleInput.current.value,
             description: descriptionInput.current.value,
+            origin: originInput.current.value,
+            destination: destinationInput.current.value,          
           }
         }
       });
@@ -119,12 +120,9 @@ function MyTrips() {
   };
 
   return (
-    <div className="container-fluid d-flex justify-content-center"
-    // id="big-box" 
-    style={{paddingTop:'200px'}}
-    >
-      <div className="text-light mb-5 pb-5">
-        <div className="text-light p-4 mb-4 ">
+    <div className="container-fluid col-lg-10">
+      <div className="mb-5 pb-5">
+        <div className="p-4 mb-4 ">
           <h4 className="mb-2">
             <strong>My Trips:</strong>
             <span> total {tripCount} trips</span>
@@ -147,10 +145,10 @@ function MyTrips() {
                 </div>
                 <div className="card-footer d-flex justify-content-evenly">
                   <div className="col-lg-3">
-                    <button className="btn btn-light w-100" onClick={() => handleDeleteTrip(trip.tripId)}>Delete Trip</button>
+                    <button className="btn btn-danger w-100" onClick={() => handleDeleteTrip(trip.tripId)}>Delete Trip</button>
                   </div>
                   <div className="col-lg-3">
-                    <button className="btn btn-light w-100" onClick={() => updateTripClick(trip)}>Update Trip</button>
+                    <button className="btn btn-dark w-100" onClick={() => updateTripClick(trip)}>Update Trip</button>
                   </div>
                 </div>
               </div>

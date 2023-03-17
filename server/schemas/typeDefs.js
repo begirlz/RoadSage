@@ -35,8 +35,6 @@ const typeDefs = gql`
     description: String
     origin: String
     destination: String
-    time: String
-    date: String
   }
   type Auth {
     token: ID!

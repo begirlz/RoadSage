@@ -10,9 +10,46 @@ import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
 
 function Header() {
+    const [isFixedTop, setisFixedTop] = useState()
+    // Handle homepage
+    window.onload = () => {
+        
+        const pageName = window.location.pathname.trim();
+        if (pageName !== "/" || pageName !== "/Home") {
+            document.body.classList.remove("homepage", "d-flex", "justify-content-center", "align-items-center");
+            setisFixedTop(false);
+        }
+        if (pageName === "/" || pageName === "/Home") {
+            document.body.classList.add("homepage", "d-flex", "justify-content-center", "align-items-center");
+            setisFixedTop(true);
+        }
+    }
+// set fixed-top navigation
+    // const [isFixedTop, setisFixedTop] = useState()
+    // window.onload = () => {
+    //     setisFixedTop(false);
+    // }
+    const homeButtonClick = () => {
+        if (!(document.body.classList.value).includes("homepage")) {
+            document.body.classList.add("homepage", "d-flex", "justify-content-center", "align-items-center");
+            setisFixedTop(true);
+        }
+    }
 
+    const navButtonClick = () => {
+        if ((document.body.classList.value).includes("homepage")) {
+            document.body.classList.remove("homepage");
+            // console.log(document.getElementById.nodeName);
+            //  document.getElementById("nav").className("fixed-top").remove();
+             setisFixedTop(false);
+             console.log(isFixedTop)
+        }
+    }
+
+
+    // On scroll 
     const [isVisible, setIsVisible] = useState(true);
-    const [height, setHeight] = useState(0)
+    const [height, setHeight] = useState(0);
 
     useEffect(() => {
         window.addEventListener("scroll", listenToScroll);
@@ -33,23 +70,23 @@ function Header() {
         }
     };
 
-    //Toggle hamburger menu
+    // Toggle hamburger menu
     const [isCollapse, setisCollapse] = useState(false)
-    // set modal display state
+    // Set modal display state
     const [showModal, setShowModal] = useState(false);
-    // set fixed-top navigation
-    // const [isFixedTop, setisFixedTop] = useState()
-    // window.onload = () => {
-    //     setisFixedTop(false);
-    // }
+    
+
     return (
         <header>
 
-            <nav className="navbar fixed-top navbar-expand-lg navbar-dark mb-2">
+            {/* <nav className="navbar fixed-top navbar-expand-lg navbar-dark mb-2"> */}
+            <nav className={`${isFixedTop ? 'fixed-top' : ''} 
+                navbar navbar-expand-lg mb-2 text-muted
+                `}>
                 <div className="navbar">
                     <div className="ms-3">
-                        <h1 className="text-dark">
-                            Jane Doe
+                        <h1 className="h1-header text-dark">
+                            Road Sage
                         </h1>
                     </div>
                 </div>
@@ -69,51 +106,102 @@ function Header() {
                     <div className="navbar-nav d-flex me-sm-2 ">
                         <div className="btn my-2 my-sm-0">
                             <Link
-                                to="About"
+                                to="Home"
                                 className=""
                                 spy="true"
                                 smooth="true"
+                                onClick={() => {
+                                    homeButtonClick();
+                                    //setisFixedTop(false);
+                                }}
                             >
-                                <strong>About ME</strong>
+                                <img className='card-img menu-item'
+                                    alt='Home'
+                                    data-tooltip-content="Home"
+                                    src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/null/external-home-instagram-flatart-icons-outline-flatarticons.png" />
                             </Link>
                         </div>
                     </div>
-                    <div className="navbar-nav d-flex me-sm-2 ">
-                        <div className="btn my-2 my-sm-0">
-                            <Link
-                                to="Portfolio"
-                                className=""
-                                spy="true"
-                                smooth="true"
-                            >
-                                <strong>Portfolio</strong>
-                            </Link>
+
+                    {Auth.loggedIn() ? (
+                        <>
+                            <div className="navbar-nav d-flex me-sm-2 ">
+                                <div className="btn my-2 my-sm-0">
+                                    <Link
+                                        to="SearchTrips"
+                                        className=""
+                                        spy="true"
+                                        smooth="true"
+                                        onClick={() => {
+                                            navButtonClick();
+                                            // setisFixedTop(true);
+                                        }}
+                                    >
+                                        <img className='card-img menu-item'
+                                            alt='searchMaps'
+                                            data-tooltip-content="Search Maps"
+                                            src="https://img.icons8.com/external-smashingstocks-detailed-outline-smashing-stocks/64/null/external-map-location-summer-smashingstocks-detailed-outline-smashing-stocks.png" />
+                                    </Link>
+                                </div>
+                            </div>
+                            <div className="navbar-nav d-flex me-sm-2 ">
+                                <div className="btn my-2 my-sm-0">
+                                    <Link
+                                        to="MyTrips"
+                                        className=""
+                                        spy="true"
+                                        smooth="true"
+                                        onClick={() => {
+                                            navButtonClick();
+                                            //setisFixedTop(true);
+                                        }}
+                                    >
+                                        <img className='card-img menu-item'
+                                            alt='MyTrips'
+                                            data-tooltip-content="My Trips"
+                                            src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/null/external-road-trip-travel-kmg-design-detailed-outline-kmg-design.png" />
+                                    </Link>
+                                </div>
+                            </div>
+                            <div className="navbar-nav d-flex me-sm-2 ">
+                                <div className="btn my-2 my-sm-0">
+                                    <Link
+                                        to="Logout"
+                                        className=""
+                                        spy="true"
+                                        smooth="true"
+                                        onClick={() => {
+                                            const loggedout = Auth.logout;
+                                            navButtonClick();
+                                        }}
+                                    >
+                                        <img className='card-img menu-item'
+                                            alt='logout'
+                                            data-tooltip-content="Log Out"
+                                            src="https://img.icons8.com/carbon-copy/64/null/logout-rounded.png" />
+                                    </Link>
+                                </div>
+                            </div>
+                        </>
+                    ) : (
+                        <div className="navbar-nav d-flex me-sm-2 ">
+                            <div className="btn my-2 my-sm-0">
+                                <Link
+                                    to="Login"
+                                    className=""
+                                    spy="true"
+                                    smooth="true"
+                                    onClick={() => setShowModal(true)}
+                                >
+                                    <img className='card-img menu-item'
+                                        alt='login'
+                                        data-tooltip-content="Log In"
+                                        src='https://img.icons8.com/external-bearicons-detailed-outline-bearicons/64/null/external-login-call-to-action-bearicons-detailed-outline-bearicons.png' />
+
+                                </Link>
+                            </div>
                         </div>
-                    </div>
-                    <div className="navbar-nav d-flex me-sm-2 ">
-                        <div className="btn my-2 my-sm-0">
-                            <Link
-                                to="Contact"
-                                className=""
-                                spy="true"
-                                smooth="true"
-                            >
-                                <strong>Contact</strong>
-                            </Link>
-                        </div>
-                    </div>
-                    <div className="navbar-nav d-flex me-sm-2 ">
-                        <div className="btn my-2 my-sm-0">
-                            <Link
-                                to="Resume"
-                                className=""
-                                spy="true"
-                                smooth="true"
-                            >
-                                <strong>Resume</strong>
-                            </Link>
-                        </div>
-                    </div>
+                    )}
 
                 </div>
 
