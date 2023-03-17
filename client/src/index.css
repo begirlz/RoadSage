@@ -10,6 +10,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
 }
 
 code {
@@ -17,21 +18,58 @@ code {
     monospace;
 }
 
+.homepage {
+  height: 100vh;
+  width: 100vw !important;
+  min-height: 400px;
+  background-size: cover;
+  background-image: url('./img/road.gif');
+  background-position: center !important;
+}
+
+.peace {
+  font-family: 'Lobster', cursive;
+}
+
+.roadrage {
+  font-family: 'Kosugi Maru', sans-serif;
+}
+
+/* If adding bigger fontsize, it's not scalable on smaller screen */
+.h1-header {
+  font-family: 'Rampart One', cursive;
+  font-size: 1000% !important;;
+  font-weight: bold !important;
+}
+
+@media (max-width: 1499.98px) {
+  .h1-header {
+    font-size: 700% !important;
+  } 
+  @media (max-width: 1199.98px) {
+    .h1-header {
+      font-size: 500% !important;
+    } 
+    @media (max-width: 599.98px) {
+      .h1-header {
+        font-size: 300% !important;
+      } 
+      @media (max-width: 399.98px) {
+        .h1-header {
+          font-size: 200% !important;
+        } 
+      }
+    }
+  }
+}
+
+/* 
 .h1-header {
   font-family: 'Rampart One', cursive;
   font-size: 500% !important;
   font-weight: bold !important;
 }
 
-/* .navbar {
-  background: transparent;
-  box-shadow: none;
-  overflow: hidden;
-  position: fixed!important;
-  top: 0!important;
-  width: 100%;
-  border-width: 0 0 1px;
-} */
 @media (max-width: 575.98px) {
   .h1-header {
     font-size: 40%!important;
@@ -53,9 +91,6 @@ code {
     font-size: 150% !important;
   }
 
-  /* .navbar-expand-lg .navbar-collapse {
-    transform: scale(0.3);
-  } */
   .burger {
     height: 25px;
   }
@@ -77,9 +112,6 @@ code {
       font-size: 250% !important;
     }
 
-    /* .navbar-expand-lg .navbar-collapse {
-      transform: scale(0.3);
-    } */
     .burger {
       height: 30px;
     }
@@ -94,7 +126,7 @@ code {
 
     h1,
     body
-    /* ,.menu-item */
+
      {
       font-size: 150% !important;
     }
@@ -103,9 +135,6 @@ code {
       font-size: 300% !important;
     }
 
-    /* .navbar-expand-lg  .navbar-collapse {
-      transform: scale(0.3);
-    } */
     .burger {
       height: 40px;
     }
@@ -128,9 +157,6 @@ code {
       font-size: 400% !important;
     }
 
-    /* .navbar-expand-lg  .navbar-collapse{
-      transform: scale(0.5);
-    } */
     .burger {
       height: 50px;
     }
@@ -201,11 +227,7 @@ code {
   padding: 5vh;
 }
 
-#hide {
-  /* position: fixed;
-  top:50vh;
-  left:40vh; */
-}
+
 
 #height {
   position: fixed;
@@ -216,3 +238,9 @@ code {
 #container {
   min-height:200vh;
 }
+
+#hide {
+  position: fixed;
+  top:50vh;
+  left:40vh;
+} */
