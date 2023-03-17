@@ -37,8 +37,19 @@ code {
 
 .h1-header {
   font-family: 'Rampart One', cursive;
-  font-size: 1000% !important;
+  font-size: 1000%;
   font-weight: bold !important;
+}
+
+@media screen and (max-width: 500px) {
+  .menu-item {
+    transform: scale(0.6);
+  }
+  @media screen and (max-width: 400px) {
+    .menu-item {
+      transform: scale(0.4);
+    }
+  }
 }
 
 

@@ -13,36 +13,33 @@ function Header() {
     const [isFixedTop, setisFixedTop] = useState()
     // Handle homepage
     window.onload = () => {
-        
+
         const pageName = window.location.pathname.trim();
         if (pageName !== "/" || pageName !== "/Home") {
-            document.body.classList.remove("homepage", "d-flex", "justify-content-center", "align-items-center");
+            // document.body.classList.remove("homepage", "d-flex", "justify-content-center", "align-items-center");
+            document.getElementById('root').classList.remove("homepage", "d-flex", "justify-content-center", "align-items-center");
             setisFixedTop(false);
         }
         if (pageName === "/" || pageName === "/Home") {
-            document.body.classList.add("homepage", "d-flex", "justify-content-center", "align-items-center");
+            // document.body.classList.add("homepage", "d-flex", "justify-content-center", "align-items-center");
+            document.getElementById('root').classList.add("homepage", "d-flex", "justify-content-center", "align-items-center");
             setisFixedTop(true);
         }
     }
-// set fixed-top navigation
-    // const [isFixedTop, setisFixedTop] = useState()
-    // window.onload = () => {
-    //     setisFixedTop(false);
-    // }
+
     const homeButtonClick = () => {
-        if (!(document.body.classList.value).includes("homepage")) {
-            document.body.classList.add("homepage", "d-flex", "justify-content-center", "align-items-center");
+        if (!(document.getElementById('root').classList.value).includes("homepage")) {
+            // document.body.classList.add("homepage", "d-flex", "justify-content-center", "align-items-center");
+            document.getElementById('root').classList.add("homepage", "d-flex", "justify-content-center", "align-items-center");
             setisFixedTop(true);
         }
     }
 
     const navButtonClick = () => {
-        if ((document.body.classList.value).includes("homepage")) {
-            document.body.classList.remove("homepage");
-            // console.log(document.getElementById.nodeName);
-            //  document.getElementById("nav").className("fixed-top").remove();
-             setisFixedTop(false);
-             console.log(isFixedTop)
+        if ((document.getElementById('root').classList.value).includes("homepage")) {
+            // document.body.classList.remove("homepage");
+            document.getElementById('root').classList.remove("homepage", "d-flex", "justify-content-center", "align-items-center");
+            setisFixedTop(false);
         }
     }
 
@@ -74,7 +71,7 @@ function Header() {
     const [isCollapse, setisCollapse] = useState(false)
     // Set modal display state
     const [showModal, setShowModal] = useState(false);
-    
+
 
     return (
         <header>
@@ -83,12 +80,12 @@ function Header() {
             <nav className={`${isFixedTop ? 'fixed-top' : ''} 
                 navbar navbar-expand-lg mb-2 text-muted
                 `}>
-                <div className="navbar">
-                    <div className="ms-3">
-                        <h1 className="h1-header text-dark">
-                            Road Sage
-                        </h1>
-                    </div>
+                <div className="navbar-brand">
+                    {/* <div className="ms-3"> style={ {fontSize: '1000%'} }*/}
+                    <h1 className="text-dark " >
+                        Road Sage
+                    </h1>
+                    {/* </div> */}
                 </div>
 
                 <button className={`navbar-toggler ${isCollapse ? '' : ''}`}
@@ -101,10 +98,10 @@ function Header() {
                     <span className="navbar-toggler-icon "></span>
                 </button>
 
-                <div className={`navbar-collapse ${isCollapse ? '' : 'collapse'} justify-content-end `}
+                <div className={`navbar-collapse ${isCollapse ? '' : 'collapse'} justify-content-end navbar-brand`}
                     id="navbarColor02">
-                    <div className="navbar-nav d-flex me-sm-2 ">
-                        <div className="btn my-2 my-sm-0">
+                    <div class="float-end">
+                        <div className="btn menu-item">
                             <Link
                                 to="Home"
                                 className=""
@@ -115,18 +112,15 @@ function Header() {
                                     //setisFixedTop(false);
                                 }}
                             >
-                                <img className='card-img menu-item'
+                                <img className='card-img '
                                     alt='Home'
                                     data-tooltip-content="Home"
                                     src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/null/external-home-instagram-flatart-icons-outline-flatarticons.png" />
                             </Link>
                         </div>
-                    </div>
-
-                    {Auth.loggedIn() ? (
-                        <>
-                            <div className="navbar-nav d-flex me-sm-2 ">
-                                <div className="btn my-2 my-sm-0">
+                        {Auth.loggedIn() ? (
+                            <>
+                                <div className="btn menu-item">
                                     <Link
                                         to="SearchTrips"
                                         className=""
@@ -137,15 +131,13 @@ function Header() {
                                             // setisFixedTop(true);
                                         }}
                                     >
-                                        <img className='card-img menu-item'
+                                        <img className='card-img'
                                             alt='searchMaps'
                                             data-tooltip-content="Search Maps"
                                             src="https://img.icons8.com/external-smashingstocks-detailed-outline-smashing-stocks/64/null/external-map-location-summer-smashingstocks-detailed-outline-smashing-stocks.png" />
                                     </Link>
                                 </div>
-                            </div>
-                            <div className="navbar-nav d-flex me-sm-2 ">
-                                <div className="btn my-2 my-sm-0">
+                                <div className="btn menu-item">
                                     <Link
                                         to="MyTrips"
                                         className=""
@@ -156,36 +148,34 @@ function Header() {
                                             //setisFixedTop(true);
                                         }}
                                     >
-                                        <img className='card-img menu-item'
+                                        <img className='card-img '
                                             alt='MyTrips'
                                             data-tooltip-content="My Trips"
                                             src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/null/external-road-trip-travel-kmg-design-detailed-outline-kmg-design.png" />
                                     </Link>
                                 </div>
-                            </div>
-                            <div className="navbar-nav d-flex me-sm-2 ">
-                                <div className="btn my-2 my-sm-0">
+                                <div className="btn menu-item">
                                     <Link
                                         to="Logout"
                                         className=""
                                         spy="true"
                                         smooth="true"
-                                        onClick={() => {
-                                            const loggedout = Auth.logout;
-                                            navButtonClick();
-                                        }}
+                                        onClick={Auth.logout}
+                                    // onClick={() => {
+                                    //     const loggedout = Auth.logout;
+                                    //     navButtonClick();
+                                    // }}
                                     >
-                                        <img className='card-img menu-item'
+                                        <img className='card-img '
                                             alt='logout'
                                             data-tooltip-content="Log Out"
                                             src="https://img.icons8.com/carbon-copy/64/null/logout-rounded.png" />
                                     </Link>
                                 </div>
-                            </div>
-                        </>
-                    ) : (
-                        <div className="navbar-nav d-flex me-sm-2 ">
-                            <div className="btn my-2 my-sm-0">
+                            </>
+                        ) : (
+
+                            <div className="btn menu-item">
                                 <Link
                                     to="Login"
                                     className=""
@@ -193,16 +183,15 @@ function Header() {
                                     smooth="true"
                                     onClick={() => setShowModal(true)}
                                 >
-                                    <img className='card-img menu-item'
+                                    <img className='card-img '
                                         alt='login'
                                         data-tooltip-content="Log In"
                                         src='https://img.icons8.com/external-bearicons-detailed-outline-bearicons/64/null/external-login-call-to-action-bearicons-detailed-outline-bearicons.png' />
 
                                 </Link>
                             </div>
-                        </div>
-                    )}
-
+                        )}
+                    </div>
                 </div>
 
             </nav>
