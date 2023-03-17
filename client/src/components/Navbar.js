@@ -80,9 +80,9 @@ function Header() {
             <nav className={`${isFixedTop ? 'fixed-top' : ''} 
                 navbar navbar-expand-lg mb-2 text-muted
                 `}>
-                <div className="navbar-brand">
+                <div className="navbar-brand ">
                     {/* <div className="ms-3"> style={ {fontSize: '1000%'} }*/}
-                    <h1 className="text-dark " >
+                    <h1 className="text-dark h1-header">
                         Road Sage
                     </h1>
                     {/* </div> */}

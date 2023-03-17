@@ -111,7 +111,6 @@ function MyTrips() {
       });
 
       alert('Trip updated successfully');
-      // window.location.reload();
 
     } catch (err) {
       alert(err)

@@ -38,8 +38,29 @@ code {
 /* If adding bigger fontsize, it's not scalable on smaller screen */
 .h1-header {
   font-family: 'Rampart One', cursive;
-  font-size: 1000%;
+  font-size: 1000% !important;;
   font-weight: bold !important;
+}
+
+@media (max-width: 1499.98px) {
+  .h1-header {
+    font-size: 700% !important;
+  } 
+  @media (max-width: 1199.98px) {
+    .h1-header {
+      font-size: 500% !important;
+    } 
+    @media (max-width: 599.98px) {
+      .h1-header {
+        font-size: 300% !important;
+      } 
+      @media (max-width: 399.98px) {
+        .h1-header {
+          font-size: 200% !important;
+        } 
+      }
+    }
+  }
 }
 
 /* 
