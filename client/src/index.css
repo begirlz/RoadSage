@@ -59,12 +59,18 @@ code {
  }
 
 .homepage {
-  height:100vh;
+  height:100%;
   width: 100vw!important;
   min-height:400px;
   background-size:cover;
   background-image:url('./img/giphy.gif');
   background-position: center!important;
+  padding-top: 250px;
+}
+
+img.card-img {
+  background-color: #b8b80dd4;
+  border-radius: 12px;
 }
 
 .hidden-spacer {

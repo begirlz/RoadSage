@@ -8,6 +8,7 @@ import Auth from '../utils/auth';
 import { Nav, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
+import Playlist from "./Playlist";
 
 function Header() {
     //Toggle hamburger menu
@@ -16,6 +17,7 @@ function Header() {
     const [showModal, setShowModal] = useState(false);
 
     return (
+        <>
         <header>
             <Tooltip anchorSelect=".menu-item" />
             <nav className="navbar navbar-expand-lg mb-2 fixed-top text-muted">
@@ -25,6 +27,7 @@ function Header() {
                         <h1 className="h1-header text-light">
                             Road Sage
                         </h1>
+                        <Playlist></Playlist>
                     </div>
                 </div>
 
@@ -183,7 +186,12 @@ function Header() {
                     </Modal.Body>
                 </Tab.Container>
             </Modal>
+            
         </header>
+        <div>
+        
+    </div>
+    </>
     );
 }
 

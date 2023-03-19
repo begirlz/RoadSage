@@ -44,28 +44,29 @@ function App() {
       <Router>
         <>
           <Navbar />
-          <Playlist></Playlist>
+          
+            {/* <Playlist></Playlist> */}
           <Routes>
             <Route
               exact path="/"
               element={<Home />}
-            />
+              />
             <Route
               exact path='/myTrips'
               element={<Mytrips />}
-            />
+              />
             <Route
               exact path='/account'
               element={<Account />}
-            />
+              />
             <Route
               exact path='/SearchTrips'
               element={<Googlemaps />}
-            />
+              />
             <Route
               exact path='/LoginForm'
               element={<LoginForm />}
-            />
+              />
             {/* <Route
               path='*'
               element={<h1 className='display-2'>Wrong page!</h1>}

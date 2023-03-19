@@ -6,19 +6,30 @@ function Playlist (){
 
     const [isPlaying, setIsPlaying] = useState(false)
 // TODO: need to finish adding the player or edits. 
+const ref=React.createRef()
+
+const handleclick=()=>{
+    console.log("inside")
+    if (isPlaying) {
+        setIsPlaying(!isPlaying)
+        ref.current.pause(
+        )
+    } else {
+        setIsPlaying(!isPlaying)
+        ref.current.play()
+    }
+}
     return(
         <>
         <div>
-        <button onClick={()=>setIsPlaying(!isPlaying)}>{!isPlaying? 'Play':'Stop'}</button>
-            <Sound url={Audio} playStatus={isPlaying?"PLAYING": "STOPPED"} />
-            {/* <Sound url={Audio} playStatus="STOPPED" /> */}
-            {/* <h3>Playlist</h3>
-            <audio src={Audio} autoplay /> */}
-            {/* <audio controls>
+        <button onClick={handleclick}>
             {
-                (new Audio().canPlayType('audio/mpeg'))? <source src="/audio/cinematic-ambient-prayer-10007.mp3" type="audio/mpeg" />:<audio src="/audio/cinematic-ambient-prayer-10007.mp3" controls/>
+                isPlaying?'Pause': 'Play'
             }
-            </audio> */}
+        </button>
+            
+            <audio ref={ref} src={Audio} /> 
+           
         </div>
         </>
     )

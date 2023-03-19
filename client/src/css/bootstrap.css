@@ -8164,7 +8164,7 @@ textarea.form-control-lg {
 
 .text-muted {
   --bs-text-opacity: 1;
-  color: #598600 !important;
+  color: #b8b80dd4 !important;
 }
 
 .text-black-50 {
@@ -10917,7 +10917,9 @@ textarea.form-control-lg {
 }
 .navbar.fixed-top {
   border-width: 0 0 1px;
+  background-color: #215f0852;
 }
+
 .navbar.fixed-bottom {
   border-width: 1px 0 0;
 }
