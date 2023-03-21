@@ -21,6 +21,7 @@ function Header() {
         <header>
             <Tooltip anchorSelect=".menu-item" />
             <nav className="navbar navbar-expand-lg mb-2 fixed-top text-muted">
+                {/* TODO: we need an if statement for the solid class for when its not home page so it doesn't scroll up and hides content, etc. */}
 
                 <div className="navbar">
                     <div className="ms-3">
@@ -51,7 +52,7 @@ function Header() {
                         <div className="navbar-nav d-inline-flex me-sm-2 buger-menu">
                             <div className="my-2 my-sm-0">
                                 <Link
-                                    to="Home"
+                                    to=""
                                     className=""
                                     spy="true"
                                     smooth="true"

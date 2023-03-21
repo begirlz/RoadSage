@@ -10920,6 +10920,11 @@ textarea.form-control-lg {
   background-color: #215f0852;
 }
 
+.navbar.fixed-top.solid {
+  background-color: #759561;
+}
+/* #759561 */
+
 .navbar.fixed-bottom {
   border-width: 1px 0 0;
 }
