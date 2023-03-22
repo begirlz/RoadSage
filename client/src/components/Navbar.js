@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";// no reloading page
+import { Link, useLocation } from "react-router-dom";// no reloading page
+// the useLocation is a function tool to get the current page location  
 import '../css/bootstrap.css';
 import { Tooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
@@ -15,13 +16,16 @@ function Header() {
     const [isCollapse, setisCollapse] = useState(false)
     // set modal display state
     const [showModal, setShowModal] = useState(false);
-
+    const location = useLocation()
+    // running the useLocation method to store the results in the location variable const.
+    // location is an object
+    
     return (
         <>
         <header>
             <Tooltip anchorSelect=".menu-item" />
-            <nav className="navbar navbar-expand-lg mb-2 fixed-top text-muted">
-                {/* TODO: we need an if statement for the solid class for when its not home page so it doesn't scroll up and hides content, etc. */}
+            <nav className={"navbar navbar-expand-lg mb-2 fixed-top text-muted"+(location.pathname!="/"?' solid':'')}>
+                
 
                 <div className="navbar">
                     <div className="ms-3">
