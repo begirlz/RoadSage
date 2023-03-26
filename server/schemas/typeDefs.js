@@ -2,7 +2,7 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
   type User {
-    _id: ID
+    _id: ID!
     username: String
     email: String
     password: String
@@ -11,7 +11,7 @@ const typeDefs = gql`
   }
 
   type Trip {
-    tripId: ID
+    tripId: ID!
     title: String
     description: String
     origin: String
@@ -21,7 +21,6 @@ const typeDefs = gql`
   }
 
   input SavedTripInput {
-    tripId: ID
     title: String
     description: String
     origin: String
@@ -30,25 +29,29 @@ const typeDefs = gql`
     date: String
   }
 
+  input UpdateTripInput {
+    tripId: ID!
+    title: String
+    description: String
+    origin: String
+    destination: String
+  }
   type Auth {
     token: ID!
     user: User
   }
 
   type Query {
-    users: [User]
-    user(username: String!): User
-    trips: [Trip]
+    getMe: User
+    getTrips(_id: String!): [User]
   }
-  type Query {
-    me: User
-}
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    saveTrip(trip: SavedTripInput): User
-    removeTrip(tripId: String!): User
+    saveTrip(tripData: SavedTripInput): User
+    removeTrip(tripId: ID!): User
+    updateTrip(trip: UpdateTripInput): User
   }
 `;
 

@@ -21,14 +21,15 @@ function MyComponent() {
 
   const originInput = useRef("")
   const destinationInput = useRef("")
-
+  const titleInput = useRef("")
+  const descriptionInput = useRef("")
   //   // purpose of a useRef is to connect an input with a variable
 
   //   // directionsCallback is importing useCallback to receive the info and run the function
-//   ATS added below code
-  const [tripDirections, setDirections] = useState ([])
+  //   ATS added below code
+  const [tripDirections, setDirections] = useState([])
   const directionsCallback = useCallback((res) => {
-    console.log(res)
+
     if (res != null) {
       setState({
         response: res, origin: '',
@@ -37,10 +38,14 @@ function MyComponent() {
       setDirections(res.routes[0].legs[0].steps)
     }
   })
-// ats added 
+  // ats added 
   const createDirections = () => {
-    return tripDirections.map((item)=>{
-        return (<div>{parse(item.instructions)} <span>{item.distance.text}</span></div>) 
+    return tripDirections.map((item) => {
+
+      return (
+        <li key={tripDirections.indexOf(item)}>{parse(item.instructions)}
+          <span>{item.distance.text}</span>
+        </li>)
     })
   }
 
@@ -48,7 +53,6 @@ function MyComponent() {
 
   // setState in the searchRoute is to change the values in the state for the user input
   function searchRoute() {
-    console.log('search:' + originInput.current.value + destinationInput.current.value);
     if (originInput.current.value !== "" && destinationInput.current.value !== "") {
       setState({
         response: null,
@@ -60,32 +64,42 @@ function MyComponent() {
 
   const [saveTrip] = useMutation(SAVE_TRIP);
 
-  const handleSaveTrip = async (originInput, destinationInput) => {
-    console.log(originInput +"," + destinationInput);
-  // console.log(typeof originInput);
-    // const SavedTripInput =  (originInput, destinationInput);
-    // const SavedTripInput =  {origin: originInput, destination: destinationInput};
-    // console.log(typeof SavedTripInput);
+
+  const handleSaveTrip = async (
+    originInput,
+    destinationInput,
+    titleInput,
+    descriptionInput
+  ) => {
+
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-    // console.log(SavedTripInput);
-    // console.log({...SavedTripInput});
 
     if (!token) {
+      alert('Please login');
       return false;
     }
     if (originInput === "" && destinationInput === "") {
       console.error('You have not searched for any route');
     }
     try {
-      console.log('savetrip: ' + originInput +',' + destinationInput);
 
       await saveTrip({
         // variables: { trip: {...SavedTripInput} }
-        variables: { trip: {tripId: '1', origin: originInput, destination: destinationInput} }
+        variables: {
+          tripData: {
+            origin: originInput,
+            destination: destinationInput,
+            title: titleInput,
+            description: descriptionInput,
+          }
+        }
       });
+
+      alert('Trip saved successfully');
+
     } catch (err) {
       console.error(err);
-    } 
+    }
   };
 
   const { isLoaded } = useLoadScript({
@@ -96,41 +110,94 @@ function MyComponent() {
   }
 
   return (
-    <div id="big-box" className="main-container">
-      <div  id="small-box">
+    <div className='container-fluid col-lg-10 topSpace '>
 
-        <form id="frm_search" className="mb-2">
-          <div className="form-group row d-flex align-items-center">
-            <label htmlFor="txt_origin" className='col-lg-2 col-form-label'>
-              <b>Origin :</b>
-            </label>
-            <div className="col-lg-3 ">
-              <input className="form-control" type="text" name='origin' id="txt_origin" placeholder='origin' ref={originInput} />
+      <form id="frm_search" className="mb-2">
+
+        <div className='form-group row d-flex align-items-center justify-content-center'>
+          <div className='row d-flex justify-content-center mb-2'>
+            <div className='col-lg-6'>
+              <div className='row '>
+                <div className='col-lg-2 w-100'>
+                  <label htmlFor="txt_title" className='w-100 col-form-label '>
+                    Title :
+                  </label>
+                </div>
+                <div className="col-lg-4 w-100 ">
+                  <input className="form-control " type="text" name='title' id="txt_title" placeholder='title' ref={titleInput} />
+                </div>
+              </div>
+              <div className='row '>
+                <div className='col-lg-2 w-100'>
+                  <label htmlFor="txt_description" className='w-100 col-form-label '>
+                    Description :
+                  </label>
+                </div>
+                <div className="col-lg-4 w-100 ">
+                  <input className="form-control w-100" type="text" name='description' id="txt_description" placeholder='description'
+                    ref={descriptionInput} />
+                </div>
+              </div>
+
+
             </div>
-            <label htmlFor="txt_destination" className='col-lg-2 col-form-label'>
-              <b>Description:</b>
-            </label>
-            <div className="col-lg-3">
-              <input className="form-control" type="text" name="destination" id="txt_destination" placeholder='destination' ref={destinationInput} />
+            <div className='col-lg-6'>
+              <div className='row '>
+                <div className='col-lg-2  w-100'>
+                  <label htmlFor="txt_origin" className='w-100 col-form-label '>
+                    Origin :
+                  </label>
+                </div>
+                <div className="col-lg-4 w-100">
+                  <input className="form-control" type="text" name='origin' id="txt_origin" placeholder='origin' ref={originInput} />
+                </div>
+              </div>
+              <div className='row '>
+                <div className='col-lg-2 w-100'>
+                  <label htmlFor="txt_destination" className='w-100 col-form-label '>
+                    Destination:
+                  </label>
+                </div>
+                <div className="col-lg-4 w-100">
+                  <input className="form-control" type="text" name="destination" id="txt_destination" placeholder='destination'
+                    ref={destinationInput} />
+                </div>
+              </div>
+              {/* <div className="form-group row d-flex justify-content-end"> */}
             </div>
-            <div className='col-lg-2'>
+          </div>
+          <div className='row d-flex justify-content-end'>
+            <div className='col-lg-2 mb-2'>
               <button
-                className='btn btn-light'
+                className='btn btn-dark w-100'
                 type='button'
                 onClick={searchRoute}>
                 Search
               </button>
-              <button
-                className='btn btn-light'
-                type='button'
-                onClick={() => handleSaveTrip(originInput.current.value, destinationInput.current.value)}>
-                Save
-              </button>
             </div>
+            {/* Allow only logged in user to save trip */}
+            {Auth.loggedIn() && (
+              <div className='col-lg-2'>
+                <button
+                  className='btn btn-dark w-100'
+                  type='button'
+                  onClick={() =>
+                    handleSaveTrip(
+                      originInput.current.value,
+                      destinationInput.current.value,
+                      titleInput.current.value,
+                      descriptionInput.current.value
+                    )}
+                >
+                  Save
+                </button>
+              </div>
+            )}
           </div>
-        </form>
+        </div>
+      </form >
 
-        <div class = "mapcontainer col">
+      <div className="mapcontainer col">
         <GoogleMap
           // required
           id='direction-example'
@@ -183,14 +250,12 @@ function MyComponent() {
 
         </GoogleMap>
         {/* ATS added code 3/8/23 */}
-        <div class = "directionsContainer">
+
+        <ol className="directionsContainer">
           {
             createDirections()
           }
-        </div>
-        </div>
-
-
+        </ol>
       </div>
     </div>
   )

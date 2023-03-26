@@ -36,8 +36,8 @@ const SignupForm = () => {
       const { data } = await createUser({
         variables: { ...userFormData }
       });
-
-      Auth.login(data.addUser.token)
+      console.log(data.addUser.token);
+      Auth.login(data.addUser.token);
 
     } catch (err) {
       console.error(err);
@@ -99,7 +99,7 @@ const SignupForm = () => {
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
         <Button
-        className='mt-sm-3 float-end col-lg-2'
+        className='float-end col-lg-2 mt-2'
           disabled={!(userFormData.username && userFormData.email && userFormData.password)}
           type='submit'
           variant='success'>

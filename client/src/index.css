@@ -10,6 +10,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
 }
 
 code {
@@ -17,16 +18,61 @@ code {
     monospace;
 }
 
-.h1-header { 
-  font-family: 'Rampart One', cursive;
-  font-size: 130px!important;
-  font-weight: bold!important;
+.homepage {
+  height: 100vh;
+  width: 100vw !important;
+  min-height: 400px;
+  background-size: cover;
+  background-image: url('./img/road.gif');
+  background-position: center !important;
 }
 
-.navbar {
-  background: transparent;
-  box-shadow: none;
+
+
+
+.peace {
+  font-family: 'Lobster', cursive;
 }
+
+.roadrage {
+  font-family: 'Kosugi Maru', sans-serif;
+}
+
+/* If adding bigger fontsize, it's not scalable on smaller screen */
+.h1-header {
+  font-family: 'Rampart One', cursive;
+  font-size: 1000% !important;;
+  font-weight: bold !important;
+}
+
+@media (max-width: 1499.98px) {
+  .h1-header {
+    font-size: 700% !important;
+  } 
+  @media (max-width: 1199.98px) {
+    .h1-header {
+      font-size: 500% !important;
+    } 
+    @media (max-width: 599.98px) {
+      .h1-header {
+        font-size: 300% !important;
+      } 
+      @media (max-width: 399.98px) {
+        .h1-header {
+          font-size: 200% !important;
+        } 
+      }
+    }
+  }
+}
+
+
+.h1-header {
+  font-family: 'Rampart One', cursive;
+  font-size: 500% !important;
+  font-weight: bold !important;
+}
+
 @media (max-width: 575.98px) {
   .h1-header {
     font-size: 40%!important;
@@ -36,27 +82,101 @@ code {
   }
 }
 
-@media (max-width: 991.98px) {
-  .navbar-expand-lg .navbar-collapse .buger-menu{
-    transform: scale(0.5); 
-    height: 10px;
-    padding-bottom: 10%;
+@media screen and (max-width: 300px) {
+
+  h1,
+  body,
+  .menu-item {
+    font-size: 90% !important;
   }
+
   .h1-header {
-    font-size: 80%!important;
-  } 
+    font-size: 150% !important;
+  }
+
+  .burger {
+    height: 25px;
+  }
+  .menu-item {
+    transform: scale(0.3);
+  }
+}
+
+@media screen and (min-width: 300px) {
+  @media screen and (max-width: 500px) {
+
+    h1,
+    body,
+    .menu-item {
+      font-size: 100% !important;
+    }
+
+    .h1-header {
+      font-size: 250% !important;
+    }
+
+    .burger {
+      height: 30px;
+    }
+    .menu-item {
+      transform: scale(0.3);
+    }
+  }
+}
+
+@media screen and (min-width: 500px) {
+  @media screen and (max-width: 900px) {
+
+    h1,
+    body
+
+     {
+      font-size: 150% !important;
+    }
+
+    .h1-header {
+      font-size: 300% !important;
+    }
+
+    .burger {
+      height: 40px;
+    }
+    .menu-item {
+      transform: scale(0.4);
+    }
+  }
+}
+
+@media screen and (min-width: 900px) {
+  @media screen and (max-width: 1400px) {
+
+    h1,
+    body,
+    .menu-item {
+      font-size: 180% !important;
+    }
+
+    .h1-header {
+      font-size: 400% !important;
+    }
+
+    .burger {
+      height: 50px;
+    }
+    .menu-item {
+      transform: scale(0.6);
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
   .collapse-center {
-    justify-content: center!important;
+    justify-content: center !important;
   }
    #small-box h1{
     font-size: 70%!important;
   }
 }
-@media (min-width: 1199.98px) {
-  .h1-header {
-    font-size: 130px!important;
-  } 
- }
 
 .homepage {
   height:100%;
@@ -65,7 +185,7 @@ code {
   background-size:cover;
   background-image:url('./img/giphy.gif');
   background-position: center!important;
-  padding-top: 250px;
+  
 }
 
 img.card-img {
@@ -87,31 +207,53 @@ img.card-img {
 #small-box {
   width: 60%;
   height: 30%;
-  /* font-family: 'Indie Flower', cursive; */
 }
 
 .peace {
   font-family: 'Lobster', cursive;
 }
+
 .roadrage {
   font-family: 'Kosugi Maru', sans-serif;
 }
+
 .main-container {
-  height:100vh;
-  width: 100vw!important;
-  min-height:400px;
+  height: 50vh;
+  width: 100vw !important;
+  min-height: 400px;
 }
-.main-container .inner-container {
+
+.inner-container {
   width: 60%;
   height: 30%;
 
-  /* font-family: 'Indie Flower', cursive; */
 }
-
 .directionsContainer {
   display:list-item, center;
   align-items: center;
   justify-content: center;
   text-align: justify, center;
   padding: 5vh;
+}
+
+
+
+#height {
+  position: fixed;
+  top:5vh;
+  left:5vh;
+}
+
+#container {
+  min-height:200vh;
+}
+
+#hide {
+  position: fixed;
+  top:50vh;
+  left:40vh;
+} 
+
+.topSpace {
+  padding-top: 177px;
 }

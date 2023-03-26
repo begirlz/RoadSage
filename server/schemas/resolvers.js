@@ -4,7 +4,7 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    me: async (parent, args, context) => {
+    getMe: async (parent, args, context) => {
       if (context.user) {
         const data = await User.findOne({ _id: context.user._id })
           .select('-__v -password')
@@ -12,12 +12,16 @@ const resolvers = {
       }
       throw new AuthenticationError('Please log in');
     },
-    // users: async () => {
-    //   return User.find()
-    // },
-    // user: async (parent, { username }) => {
-    //   return User.findOne({ username })
-    // }
+    getTrips: async (parent, { _id }, context) => {
+      console.log('before find')
+      if (context.user) {
+        const data = await User.find(
+          { _id, _id },
+          {})
+        console.log(data);
+        return data;
+      }
+    }
   },
 
   Mutation: {
@@ -39,50 +43,46 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    // addUser: async (parent, { username, email, password }) => {
-    //   const user = await User.create({ username, email, password });
-    //   const token = signToken(user);
-    //   return { token, user };
-    // },
-    // login: async (parent, { email, password }) => {
-    //   const user = await User.findOne({ email });
+    saveTrip: async (parent, { tripData }, context) => {
+      console.log('save trip mutation');
+      if (context.user) {
 
-    //   if (!user) {
-    //     throw new AuthenticationError('No user found with this email address');
-    //   }
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { savedTrips: tripData } },
+          { new: true, runValidators: true }
+        );
+        return updatedUser;
+      }
+      throw new AuthenticationError("Please log in");
+    },
+    removeTrip: async (parent, { tripId }, context) => {
+      console.log('remove trip mutation');
 
-    //   const correctPw = await user.isCorrectPassword(password);
-
-    //   if (!correctPw) {
-    //     throw new AuthenticationError('Incorrect credentials');
-    //   }
-
-    //   const token = signToken(user);
-
-    //   return { token, user };
-    // },
-    saveTrip: async (parent, {origin, destination} , context) => {
-      console.log('mutation1');
-      console.log(typeof origin);
-      console.log(origin);
       if (context.user) {
         console.log('mutation');
         const updatedUser = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { savedTrips: {origin: origin, destination: destination} } },
-          { new: true, runValidators: true }
+          { $pull: { savedTrips: { tripId } } },
+          { new: true }
         );
-      return updatedUser;
-    }
-    throw new AuthenticationError("Please log in");
+        return updatedUser;
+      }
     },
-    removeTrip: async (parent, { tripId }, context) => {
-      const updatedUser = await User.findOneAndUpdate(
-        { _id: user._id },
-        { $pull: { savedTrips: { tripId: tripId } } },
-        { new: true }
-      );
+    updateTrip: async (parent, { trip }, context) => {
+      console.log('Update Trip mutation')
 
+      if (context.user) {
+        console.log(context.user);
+        const updatedUser = await User.findOneAndUpdate(
+          { _id: context.user._id, 'savedTrips.tripId': trip.tripId },
+          { $set: { 'savedTrips.$': trip } },
+          {new:true, runValidators: true }
+        )
+
+        return updatedUser;
+      }
+      throw new AuthenticationError("Please log in");
     }
   },
 };
