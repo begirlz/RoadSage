@@ -27,6 +27,7 @@ code {
   background-position: center !important;
 }
 
+
 .peace {
   font-family: 'Lobster', cursive;
 }
@@ -40,6 +41,7 @@ code {
   font-family: 'Rampart One', cursive;
   font-size: 1000% !important;;
   font-weight: bold !important;
+
 }
 
 @media (max-width: 1499.98px) {
@@ -63,7 +65,7 @@ code {
   }
 }
 
-/* 
+
 .h1-header {
   font-family: 'Rampart One', cursive;
   font-size: 500% !important;
@@ -176,12 +178,19 @@ code {
 }
 
 .homepage {
-  height: 100vh;
-  width: 100vw !important;
-  min-height: 400px;
-  background-size: cover;
-  background-image: url('./img/road.gif');
-  background-position: center !important;
+  height:100%;
+  width: 100vw!important;
+  min-height:400px;
+  background-size:cover;
+  background-image:url('./img/giphy.gif');
+  background-position: center!important;
+  
+}
+
+img.card-img {
+  background-color: #b8b80dd4;
+  border-radius: 12px;
+
 }
 
 .hidden-spacer {
@@ -243,4 +252,10 @@ code {
   position: fixed;
   top:50vh;
   left:40vh;
-} */
+
+} 
+
+.topSpace {
+  padding-top: 177px;
+}
+

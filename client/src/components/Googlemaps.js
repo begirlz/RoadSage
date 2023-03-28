@@ -110,7 +110,8 @@ function MyComponent() {
   }
 
   return (
-    <div className='container-fluid col-lg-10'>
+
+    <div className='container-fluid col-lg-10 topSpace '>
 
       <form id="frm_search" className="mb-2">
 

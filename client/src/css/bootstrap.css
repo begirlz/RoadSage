@@ -9185,7 +9185,7 @@ fieldset:disabled .btn {
 
 .text-light {
   --bs-text-opacity: 1;
-  color: rgba(var(--bs-light-rgb), var(--bs-text-opacity)) !important;
+  color: #e9ecef (var(--bs-light-rgb), var(--bs-text-opacity)) !important;
 }
 
 .text-dark {
@@ -9210,7 +9210,8 @@ fieldset:disabled .btn {
 
 .text-muted {
   --bs-text-opacity: 1;
-  color: #868e96 !important;
+  color: #b8b80dd4 !important;
+  text-align: center;
 }
 
 .text-black-50 {
@@ -12748,6 +12749,7 @@ fieldset:disabled .btn {
 
 .navbar {
   font-size: 0.9625rem;
+  background-color: #75956169;
 }
 
 .navbar.bg-dark {
@@ -12761,6 +12763,12 @@ fieldset:disabled .btn {
 
 .navbar.bg-light.navbar-fixed-top {
   border-width: 0 0 1px;
+
+  background-color: #215f0852;
+}
+
+.navbar.fixed-top.solid {
+  background-color: #759561;
 }
 
 .navbar.bg-light.navbar-fixed-bottom {

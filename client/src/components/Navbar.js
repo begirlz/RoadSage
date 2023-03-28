@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";// no reloading page
+import { Link, useLocation } from "react-router-dom";// no reloading page
+// the useLocation is a function tool to get the current page location  
+
 import '../css/bootstrap.css';
 // import { Tooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
@@ -8,40 +10,11 @@ import Auth from '../utils/auth';
 import { Nav, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
+import Playlist from "./Playlist";
 
 function Header() {
     const [isFixedTop, setisFixedTop] = useState()
     // Handle homepage
-    window.onload = () => {
-
-        const pageName = window.location.pathname.trim();
-        if (pageName !== "/" || pageName !== "/Home") {
-            // document.body.classList.remove("homepage", "d-flex", "justify-content-center", "align-items-center");
-            document.getElementById('root').classList.remove("homepage", "d-flex", "justify-content-center", "align-items-center");
-            setisFixedTop(false);
-        }
-        if (pageName === "/" || pageName === "/Home") {
-            // document.body.classList.add("homepage", "d-flex", "justify-content-center", "align-items-center");
-            document.getElementById('root').classList.add("homepage", "d-flex", "justify-content-center", "align-items-center");
-            setisFixedTop(true);
-        }
-    }
-
-    const homeButtonClick = () => {
-        if (!(document.getElementById('root').classList.value).includes("homepage")) {
-            // document.body.classList.add("homepage", "d-flex", "justify-content-center", "align-items-center");
-            document.getElementById('root').classList.add("homepage", "d-flex", "justify-content-center", "align-items-center");
-            setisFixedTop(true);
-        }
-    }
-
-    const navButtonClick = () => {
-        if ((document.getElementById('root').classList.value).includes("homepage")) {
-            // document.body.classList.remove("homepage");
-            document.getElementById('root').classList.remove("homepage", "d-flex", "justify-content-center", "align-items-center");
-            setisFixedTop(false);
-        }
-    }
 
 
     // On scroll 
@@ -71,19 +44,25 @@ function Header() {
     const [isCollapse, setisCollapse] = useState(false)
     // Set modal display state
     const [showModal, setShowModal] = useState(false);
-
-
+    const location = useLocation()
+    // running the useLocation method to store the results in the location variable const.
+    // location is an object
+    
     return (
+        
         <header>
+            
+            <nav className={"navbar navbar-expand-lg mb-2 fixed-top  text-muted"+(location.pathname!="/"?' solid':'')}>
+                
 
-            {/* <nav className="navbar fixed-top navbar-expand-lg navbar-dark mb-2"> */}
-            <nav className={`${isFixedTop ? 'fixed-top' : ''} 
-                navbar navbar-expand-lg mb-2 text-muted
-                `}>
-                <div className="navbar-brand ">
-                    <h1 className="text-dark h1-header">
-                        Road Sage
-                    </h1>
+                <div className="">
+                    <div className="ms-3">
+                        <h1 className="h1-header text-light">
+                            Road Sage
+                        </h1>
+                        <Playlist></Playlist>
+                    </div>
+
                 </div>
 
                 <button className={`navbar-toggler ${isCollapse ? '' : ''}`}
@@ -101,14 +80,10 @@ function Header() {
                     <div class="d-flex justify-content-end">
                         <div className="btn ">
                             <Link
-                                to="Home"
+                                to=""
                                 className=""
                                 spy="true"
                                 smooth="true"
-                                onClick={() => {
-                                    homeButtonClick();
-                                    //setisFixedTop(false);
-                                }}
                             >
                                 <img className='card-img '
                                     alt='Home'
@@ -124,10 +99,7 @@ function Header() {
                                         className=""
                                         spy="true"
                                         smooth="true"
-                                        onClick={() => {
-                                            navButtonClick();
-                                            // setisFixedTop(true);
-                                        }}
+
                                     >
                                         <img className='card-img'
                                             alt='searchMaps'
@@ -141,15 +113,12 @@ function Header() {
                                         className=""
                                         spy="true"
                                         smooth="true"
-                                        onClick={() => {
-                                            navButtonClick();
-                                            //setisFixedTop(true);
-                                        }}
                                     >
                                         <img className='card-img '
                                             alt='MyTrips'
                                             data-tooltip-content="My Trips"
                                             src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/null/external-road-trip-travel-kmg-design-detailed-outline-kmg-design.png" />
+
                                     </Link>
                                 </div>
                                 <div className="btn ">
