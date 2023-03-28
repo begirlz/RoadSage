@@ -10,6 +10,7 @@ const Home = () => {
         {/* <Playlist></Playlist> */}
           <h1 className="text-muted">The trip planner that gives you <span className='peace'>PEACE</span> instead of <span className="roadrage">ROAD RAGE</span></h1>
         </div>
+
     </div>
 
     // </div>

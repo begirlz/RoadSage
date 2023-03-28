@@ -119,6 +119,7 @@ function MyTrips() {
   };
 
   return (
+
     <div className="container-fluid col-lg-10 topSpace">
       <div className="mb-5 pb-5">
         <div className="p-4 mb-4 ">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";// no reloading page
 // the useLocation is a function tool to get the current page location  
+
 import '../css/bootstrap.css';
 // import { Tooltip } from 'react-tooltip'
 import 'react-tooltip/dist/react-tooltip.css'
@@ -14,7 +15,6 @@ import Playlist from "./Playlist";
 function Header() {
     const [isFixedTop, setisFixedTop] = useState()
     // Handle homepage
-    
 
 
     // On scroll 
@@ -62,6 +62,7 @@ function Header() {
                         </h1>
                         <Playlist></Playlist>
                     </div>
+
                 </div>
 
                 <button className={`navbar-toggler ${isCollapse ? '' : ''}`}
@@ -98,6 +99,7 @@ function Header() {
                                         className=""
                                         spy="true"
                                         smooth="true"
+
                                     >
                                         <img className='card-img'
                                             alt='searchMaps'
@@ -116,6 +118,7 @@ function Header() {
                                             alt='MyTrips'
                                             data-tooltip-content="My Trips"
                                             src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/64/null/external-road-trip-travel-kmg-design-detailed-outline-kmg-design.png" />
+
                                     </Link>
                                 </div>
                                 <div className="btn ">

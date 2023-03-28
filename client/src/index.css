@@ -28,8 +28,6 @@ code {
 }
 
 
-
-
 .peace {
   font-family: 'Lobster', cursive;
 }
@@ -43,6 +41,7 @@ code {
   font-family: 'Rampart One', cursive;
   font-size: 1000% !important;;
   font-weight: bold !important;
+
 }
 
 @media (max-width: 1499.98px) {
@@ -191,6 +190,7 @@ code {
 img.card-img {
   background-color: #b8b80dd4;
   border-radius: 12px;
+
 }
 
 .hidden-spacer {
@@ -252,8 +252,10 @@ img.card-img {
   position: fixed;
   top:50vh;
   left:40vh;
+
 } 
 
 .topSpace {
   padding-top: 177px;
 }
+
