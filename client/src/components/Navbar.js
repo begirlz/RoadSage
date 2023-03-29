@@ -77,7 +77,7 @@ function Header() {
 
                 <div className={`navbar-collapse ${isCollapse ? '' : 'collapse'} justify-content-end navbar-brand`}
                     id="navbarColor02">
-                    <div class="d-flex justify-content-end">
+                    <div className="d-flex justify-content-end">
                         <div className="btn ">
                             <Link
                                 to=""
